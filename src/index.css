@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg-paper: #F8F6F2;
+  --color-text-primary: #241A17;
+  --color-text-secondary: #8A8178;
+  --color-accent-brown: #4A2F25;
+  --color-border-warm: #EAE3D9;
+  --color-white-warm: #FFFFFF;
+}
+
+.dark {
+  --color-bg-paper: #1A1513;
+  --color-text-primary: #ECE4E0;
+  --color-text-secondary: #A0968E;
+  --color-accent-brown: #D4B2A7;
+  --color-border-warm: #2E2522;
+  --color-white-warm: #221B19;
+}
+
+@theme {
+  --color-bg-paper: var(--color-bg-paper);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-accent-brown: var(--color-accent-brown);
+  --color-border-warm: var(--color-border-warm);
+  --color-white-warm: var(--color-white-warm);
+
+  --font-sans: "Inter", sans-serif;
+  --font-serif-editorial: "Cormorant Garamond", Georgia, serif;
+  --font-mono-tag: "Roboto Mono", monospace;
+}
+
+/* Base Styles */
+html {
+  background-color: var(--color-bg-paper);
+  color: var(--color-text-primary);
+  font-family: "Inter", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom selection styling */
+::selection {
+  background-color: var(--color-accent-brown);
+  color: var(--color-bg-paper);
+}
+
+/* Focus outline accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-accent-brown);
+  outline-offset: 4px;
+}
+
+/* Lenis smooth scrolling rules */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overflow: clip;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Print formatting rules */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
