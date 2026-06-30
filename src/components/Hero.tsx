@@ -36,9 +36,7 @@ export const Hero: React.FC = () => {
             {/* Monospace biography text paragraphs */}
             <div className="space-y-6 font-mono-tag text-[15px] sm:text-[16px] text-text-primary/90 leading-[2] tracking-normal select-text">
               <p>
-                Hi I'm Archi. I'm a developer and designer who ships tactile, context-aware web interfaces. 
-                My focus is on frontend engineering, interactive prototyping, and open-source tools. 
-                Currently building interactive applications in AI and XR.
+                Hi, I'm Archi. I build interactive products that blend thoughtful design, modern engineering, and emerging technologies like AI and XR. Currently exploring AI agents, immersive experiences, and open-source software.
               </p>
             </div>
 
