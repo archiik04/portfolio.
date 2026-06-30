@@ -22,7 +22,7 @@ export const questsData: QuestItem[] = [
   {
     id: 'gravity-manipulator',
     url: gravityCover,
-    videoUrl: '/gravity manipulator.mp4',
+    videoUrl: 'https://drive.google.com/file/d/1r83yEmOTXBWZa3avc6UaZRPULI76Bes1/preview',
     title: 'Gravity manipulator',
     description: 'A VR experience where you can push, pull, and combine the spheres whenever needed.',
     longWriting: 'A VR experience where you can push, pull, and combine the spheres whenever needed.',
