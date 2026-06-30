@@ -44,7 +44,7 @@ export const questsData: QuestItem[] = [
   {
     id: 'teleportation',
     url: teleportationCover,
-    videoUrl: '/teleportation.mp4',
+    videoUrl: 'https://drive.google.com/file/d/1hruvLEFrP_biZ6nr3N8JwNZDBJoVsyaO/preview',
     title: 'Teleportation',
     description: 'A vr experience where you teleport using the blue glowy boxes and through moving swords moving anticlockwise.',
     longWriting: 'A vr experience where you teleport using the blue glowy boxes and through moving swords moving anticlockwise.',
