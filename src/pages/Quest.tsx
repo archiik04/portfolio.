@@ -108,7 +108,7 @@ export const Quest: React.FC = () => {
                   onClick={() => {
                     if (!item.disablePopup) setSelectedQuest(item);
                   }}
-                  className={`col-span-1 md:col-span-2 h-[350px] md:h-[380px] overflow-hidden rounded-3xl border border-white/30 dark:border-white-warm/10 bg-white/40 dark:bg-white-warm/5 backdrop-blur-md shadow-lg p-6 sm:p-8 flex flex-col md:flex-row justify-between gap-6 group ${cursorClass}`}
+                  className={`col-span-1 md:col-span-2 h-auto md:h-[380px] overflow-hidden rounded-3xl border border-white/30 dark:border-white-warm/10 bg-white/40 dark:bg-white-warm/5 backdrop-blur-md shadow-lg p-6 sm:p-8 flex flex-col md:flex-row justify-between gap-6 group ${cursorClass}`}
                 >
                   {isImageLeft && (
                     <div className="w-full md:w-1/2 h-[160px] md:h-full rounded-2xl overflow-hidden border border-white/20 dark:border-white-warm/5 relative order-last md:order-first">
@@ -172,7 +172,7 @@ export const Quest: React.FC = () => {
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.95, y: 15 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-                className="bg-bg-paper border border-border-warm rounded-3xl w-full max-w-[960px] max-h-[85vh] overflow-y-auto flex flex-col md:flex-row relative shadow-2xl"
+                className="bg-bg-paper border border-border-warm rounded-3xl w-full max-w-[960px] h-auto md:h-[520px] max-h-[90vh] md:max-h-[85vh] overflow-y-auto md:overflow-y-hidden flex flex-col md:flex-row relative shadow-2xl"
                 onClick={e => e.stopPropagation()}
               >
                 {/* Close button */}
@@ -185,7 +185,7 @@ export const Quest: React.FC = () => {
                 </button>
 
                 {/* Left Column: Media Player / Cover Image */}
-                <div className="w-full md:w-1/2 bg-white-warm border-b md:border-b-0 md:border-r border-border-warm relative flex items-center justify-center overflow-hidden min-h-[300px] md:min-h-0">
+                <div className="w-full md:w-1/2 bg-white-warm border-b md:border-b-0 md:border-r border-border-warm relative flex items-center justify-center overflow-hidden aspect-video md:aspect-auto h-[240px] md:h-full shrink-0">
                   {selectedQuest.videoUrl ? (
                     selectedQuest.videoUrl.endsWith('.mp4') || selectedQuest.videoUrl.startsWith('/') ? (
                       <video
@@ -216,7 +216,7 @@ export const Quest: React.FC = () => {
                 </div>
 
                 {/* Right Column: Writing Content */}
-                <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto text-left">
+                <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-visible md:overflow-y-auto text-left h-auto md:h-full">
                   <div className="space-y-5">
                     {/* Meta Row */}
                     <div className="flex items-center gap-3">

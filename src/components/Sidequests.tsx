@@ -121,7 +121,7 @@ export const Sidequests: React.FC = () => {
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.95, y: 15 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-                className="bg-bg-paper border border-border-warm rounded-3xl w-full max-w-[960px] max-h-[85vh] overflow-y-auto flex flex-col md:flex-row relative shadow-2xl"
+                className="bg-bg-paper border border-border-warm rounded-3xl w-full max-w-[960px] h-auto md:h-[520px] max-h-[90vh] md:max-h-[85vh] overflow-y-auto md:overflow-y-hidden flex flex-col md:flex-row relative shadow-2xl"
                 onClick={e => e.stopPropagation()}
               >
                 {/* Floating Close Button */}
@@ -134,7 +134,7 @@ export const Sidequests: React.FC = () => {
                 </button>
 
                 {/* Left Column: Media Player / Cover Image */}
-                <div className="w-full md:w-1/2 bg-white-warm border-b md:border-b-0 md:border-r border-border-warm relative flex items-center justify-center overflow-hidden min-h-[300px] md:min-h-0">
+                <div className="w-full md:w-1/2 bg-white-warm border-b md:border-b-0 md:border-r border-border-warm relative flex items-center justify-center overflow-hidden aspect-video md:aspect-auto h-[240px] md:h-full shrink-0">
                   {selectedQuest.videoUrl ? (
                     selectedQuest.videoUrl.endsWith('.mp4') || selectedQuest.videoUrl.startsWith('/') ? (
                       <video
@@ -165,7 +165,7 @@ export const Sidequests: React.FC = () => {
                 </div>
 
                 {/* Right Column: Writing Content */}
-                <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto text-left">
+                <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-visible md:overflow-y-auto text-left h-auto md:h-full">
                   <div className="space-y-5">
                     {/* Meta Row */}
                     <div className="flex items-center gap-3">
