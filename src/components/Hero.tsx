@@ -45,7 +45,7 @@ export const Hero: React.FC = () => {
             {/* 3. Call-to-Action buttons row */}
             <div className="flex flex-wrap gap-4 pt-2 select-none">
               <a
-                href="https://cal.com/archi"
+                href="https://calendly.com/archi_k/youth-mentorship"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-2.5 rounded-xl bg-[#241A17] hover:bg-[#3A2E2C] text-[#F8F6F2] font-sans font-medium text-[14px] flex items-center gap-2 shadow-sm transition-all duration-200 cursor-pointer active:scale-[0.98]"
