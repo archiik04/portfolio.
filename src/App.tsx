@@ -8,9 +8,10 @@ import { Experience } from './components/Experience';
 import { Education } from './components/Education';
 import { SkillsSection } from './components/SkillsSection';
 import { Footer } from './components/Footer';
+import { Sidequests } from './components/Sidequests';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { ResumeViewer } from './pages/ResumeViewer';
-import { Blogs } from './pages/Blogs';
+import { Quest } from './pages/Quest';
 
 function App() {
   // Initialize Lenis smooth inertial scrolling
@@ -68,7 +69,8 @@ function App() {
                 <Education />
 
                 <SkillsSection />
-                
+
+                <Sidequests />
               </div>
             </main>
 
@@ -84,8 +86,8 @@ function App() {
       {/* 3. Resume Viewer Route */}
       <Route path="/resume" element={<ResumeViewer />} />
 
-      {/* 4. Blogs Route */}
-      <Route path="/blogs" element={<Blogs />} />
+      {/* 4. Quest Route */}
+      <Route path="/quest" element={<Quest />} />
     </Routes>
   );
 }

@@ -1,6 +1,5 @@
 import docsyImg from '../assets/docsy.png';
 import vrmazeescapeImg from '../assets/vrmazeescape.png';
-import blueprintImg from '../assets/blueprint.png';
 import loreImg from '../assets/lore.png';
 
 export interface Project {
@@ -53,23 +52,6 @@ export const projects: Project[] = [
     solution: 'Created a fully-immersive VR layout where players navigate rooms using real-scale head tracking and touch interactions, heightening spatial navigation and logical puzzle solving.',
     architecture: 'Built in Unity using the XR Interaction Toolkit for cross-platform controller mappings. Procedural maze generation utilizes a modified randomized Prim\'s algorithm to structure corridors.',
     lessonsLearned: 'Optimizing GPU frame times to maintain a constant 90 FPS is vital. Any frame drops in VR quickly cause motion sickness; baking static lighting and pooling object meshes solved this.'
-  },
-  {
-    id: 'blueprint',
-    title: 'Blueprint',
-    description: 'Blueprint is an AI UI builder that turns prompts into structured, production-ready interfaces.',
-    longDescription: 'Blueprint is an AI-powered code generator and design workspace. Users input layout prompts or visual sketches, and the AI translates it into formatted, responsive React and Tailwind components with live previews.',
-    techStack: ['react', 'typescript', 'tailwind', 'openai', 'framer-motion'],
-    github: 'https://github.com/archiik04/blueprint',
-    demo: 'https://blueprint.example.com',
-    status: 'Building',
-    image: blueprintImg,
-    youtubeEmbedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    year: '2026',
-    problem: 'Manually translating design ideas or wireframe prompts into production-grade HTML and CSS is time-consuming and often requires multiple design iterations.',
-    solution: 'Created an AI design engine that processes layout prompts, structures the component nesting logic, and streams clean React code that can be previewed in a sandboxed iframe.',
-    architecture: 'Integrates OpenAI streaming API directly with a web-based bundler workspace, rendering live previews at 60 FPS while highlighting styling changes in a split-screen editor.',
-    lessonsLearned: 'Parsing live code streaming requires fault-tolerant React render wrappers to prevent the browser preview window from throwing uncaught runtime errors during execution.'
   },
   {
     id: 'lore',

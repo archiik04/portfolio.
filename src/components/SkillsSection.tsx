@@ -6,8 +6,6 @@ import { GithubContributions } from './GithubContributions';
 import {
   ReactIcon,
   NextIcon,
-  ExpoIcon,
-  DjangoIcon,
   ExpressIcon,
   NodeIcon,
   BunIcon,
@@ -15,13 +13,9 @@ import {
   MongoDBIcon,
   RedisIcon,
   PrismaIcon,
-  ZustandIcon,
-  TanstackQueryIcon,
   PostmanIcon,
   TailwindIcon,
   ShadcnIcon,
-  MotionIcon,
-  GsapIcon,
   JavaScriptIcon,
   TypeScriptIcon,
   PythonIcon,
@@ -29,16 +23,15 @@ import {
   SqlIcon,
   GitIcon,
   GithubIcon,
-  FigmaIcon,
   DockerIcon,
-  LinuxIcon
+  UnityIcon,
+  ArIcon,
+  VrIcon
 } from './SkillIcons';
 
 const skillsData = [
   { name: 'React', icon: ReactIcon },
   { name: 'Next', icon: NextIcon },
-  { name: 'Expo', icon: ExpoIcon },
-  { name: 'Django', icon: DjangoIcon },
   { name: 'Express', icon: ExpressIcon },
   { name: 'Node', icon: NodeIcon },
   { name: 'Bun', icon: BunIcon },
@@ -46,13 +39,12 @@ const skillsData = [
   { name: 'MongoDB', icon: MongoDBIcon },
   { name: 'Redis', icon: RedisIcon },
   { name: 'Prisma', icon: PrismaIcon },
-  { name: 'Zustand', icon: ZustandIcon },
-  { name: 'Tanstack Query', icon: TanstackQueryIcon },
   { name: 'Postman', icon: PostmanIcon },
   { name: 'Tailwind', icon: TailwindIcon },
   { name: 'shadcn', icon: ShadcnIcon },
-  { name: 'Motion', icon: MotionIcon },
-  { name: 'GSAP', icon: GsapIcon },
+  { name: 'Unity', icon: UnityIcon },
+  { name: 'AR', icon: ArIcon },
+  { name: 'VR', icon: VrIcon },
   { name: 'JavaScript', icon: JavaScriptIcon },
   { name: 'TypeScript', icon: TypeScriptIcon },
   { name: 'Python', icon: PythonIcon },
@@ -60,9 +52,7 @@ const skillsData = [
   { name: 'SQL', icon: SqlIcon },
   { name: 'Git', icon: GitIcon },
   { name: 'Github', icon: GithubIcon },
-  { name: 'Figma', icon: FigmaIcon },
   { name: 'Docker', icon: DockerIcon },
-  { name: 'Linux', icon: LinuxIcon },
 ];
 
 export const SkillsSection: React.FC = () => {

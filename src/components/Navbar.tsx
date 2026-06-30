@@ -15,7 +15,7 @@ export const Navbar: React.FC = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
-  const sectionIds = ['hero', 'projects', 'experience', 'education', 'skills'];
+  const sectionIds = ['hero', 'projects', 'quest', 'experience', 'education', 'skills'];
   const activeSection = useActiveSection(sectionIds);
 
   // Sync theme
@@ -70,8 +70,8 @@ export const Navbar: React.FC = () => {
       setMobileMenuOpen(false);
       return;
     }
-    if (id === 'blogs') {
-      navigate('/blogs');
+    if (id === 'quest') {
+      navigate('/quest');
       setMobileMenuOpen(false);
       return;
     }
@@ -106,7 +106,7 @@ export const Navbar: React.FC = () => {
 
   const rightLinks = [
     { label: 'Skills', target: 'skills' },
-    { label: 'Blogs', target: 'blogs' },
+    { label: 'Quest', target: 'quest' },
   ];
 
   const renderLink = (link: { label: string; target: string }) => {
