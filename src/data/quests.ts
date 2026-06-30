@@ -55,7 +55,7 @@ export const questsData: QuestItem[] = [
   {
     id: 'ai-npc',
     url: ainpcCover,
-    videoUrl: '/ai npc .mp4',
+    videoUrl: 'https://drive.google.com/file/d/1PeReihGj1fJfiVfNbb1jUINX4tuf4Bhx/preview',
     title: 'AI NPC',
     description: 'A VR marketplace simulation set in a retail environment, allowing users to converse with an AI NPC to query consumer demand and manage regional zone updates in real-time.',
     longWriting: 'A VR marketplace simulation set in a retail environment, allowing users to converse with an AI NPC to query consumer demand and manage regional zone updates in real-time.',
