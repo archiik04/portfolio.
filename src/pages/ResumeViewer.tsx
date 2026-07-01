@@ -37,12 +37,7 @@ export const ResumeViewer: React.FC = () => {
   };
 
   const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = '/resume.pdf';
-    link.download = 'Archi_Kanungo_Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    window.open('https://drive.google.com/uc?export=download&id=1e7dGikFP3sM_ieE2Ph4JIw86K9swEZzI', '_blank');
   };
 
   return (
@@ -110,7 +105,7 @@ export const ResumeViewer: React.FC = () => {
 
           <div className="flex items-center gap-3">
             <a
-              href="/resume.pdf"
+              href="https://drive.google.com/file/d/1e7dGikFP3sM_ieE2Ph4JIw86K9swEZzI/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2.5 rounded-xl border border-border-warm bg-white dark:bg-white-warm/5 hover:bg-white-warm dark:hover:bg-white-warm/10 text-text-secondary hover:text-text-primary transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center shadow-sm"
@@ -132,7 +127,7 @@ export const ResumeViewer: React.FC = () => {
         {/* 4. Embedded PDF Document Frame */}
         <div className="w-full max-w-[800px] mx-auto rounded-2xl overflow-hidden border border-border-warm bg-white shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
           <iframe
-            src="/resume.pdf#toolbar=1"
+            src="https://drive.google.com/file/d/1e7dGikFP3sM_ieE2Ph4JIw86K9swEZzI/preview"
             className="w-full h-[1100px] border-none"
             title="Archi Kanungo Resume"
           >

@@ -109,9 +109,6 @@ export const ProjectDetail: React.FC = () => {
               <h1 className="font-serif-editorial text-[25px] sm:text-[28px] text-text-primary font-normal leading-tight">
                 {project.title}
               </h1>
-              <span className="font-mono-tag text-[11px] text-text-secondary uppercase tracking-wider mt-0.5">
-                Projects/{project.title}
-              </span>
             </div>
           </div>
 

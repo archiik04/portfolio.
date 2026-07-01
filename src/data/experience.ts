@@ -18,15 +18,15 @@ export interface ExperienceItem {
 export const experiences: ExperienceItem[] = [
   {
     id: 'aashdit',
-    role: 'AI/ML Intern',
+    role: 'AI Intern',
     organization: 'Aashdit Technologies',
     duration: 'May 2026 – Jun. 2026',
-    location: 'Bhubaneswar, India — On-site',
+    location: 'Bhubaneswar, India, On-site',
     responsibilities: [
       'Delivered end-to-end RAG platform enabling semantic document search for enterprise; shipped features across 3 document types (PDFs, DOCX, scanned); optimized for production deployment handling 10K+ concurrent documents with sub-200ms response time.'
     ],
     technologies: [
-      'RAG', 'NLP', 'Vector DB', 'Python', 'Document Parsing', 'Semantic Search'
+      'RAG', 'Vector DB', 'Python', 'Document Parsing', 'Semantic Search'
     ],
     metrics: [
       { value: '3', label: 'DOC TYPES' },

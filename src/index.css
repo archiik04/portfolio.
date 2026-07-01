@@ -10,12 +10,12 @@
 }
 
 .dark {
-  --color-bg-paper: #1A1513;
-  --color-text-primary: #ECE4E0;
-  --color-text-secondary: #A0968E;
-  --color-accent-brown: #D4B2A7;
-  --color-border-warm: #2E2522;
-  --color-white-warm: #221B19;
+  --color-bg-paper: #090706; /* Deep obsidian carbon background */
+  --color-text-primary: #FAF6F4; /* Soft bright cream text */
+  --color-text-secondary: #9E918C; /* Clean warm slate grey */
+  --color-accent-brown: #E4C1B6; /* Beautiful soft copper metallic highlight */
+  --color-border-warm: #1F1917; /* Very clean dark outline border */
+  --color-white-warm: #14100E; /* Clean, deep solid card background */
 }
 
 @theme {
@@ -96,4 +96,56 @@ html.lenis body {
   .no-print {
     display: none !important;
   }
+}
+
+/* Dark Theme Custom Personalization Overrides */
+.dark a.group > div {
+  background-color: #14100E !important;
+  border-color: #211917 !important;
+}
+.dark a.group:hover > div {
+  border-color: #4A3530 !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Experience & Education cards */
+.dark .border-border-warm.bg-white-warm\/5,
+.dark .border-border-warm.bg-white-warm\/8,
+.dark .border-border-warm.bg-white-warm\/40 {
+  background-color: #14100E !important;
+  border-color: #211917 !important;
+}
+.dark .border-border-warm.bg-white-warm\/5:hover,
+.dark .border-border-warm.bg-white-warm\/8:hover {
+  border-color: #3D2D29 !important;
+}
+
+/* Accordion expand indicator bg */
+.dark .bg-bg-paper.dark\:bg-white-warm\/5 {
+  background-color: #1F1816 !important;
+}
+
+/* Bento grid cards in Quest Log */
+.dark .border-white\/30.dark\:border-white-warm\/10 {
+  background-color: rgba(20, 16, 14, 0.85) !important;
+  border-color: #241D1B !important;
+}
+.dark .border-white\/30.dark\:border-white-warm\/10:hover {
+  border-color: #45322E !important;
+}
+
+/* Social links and small badges */
+.dark .border-border-warm.bg-white-warm\/8 {
+  background-color: #181311 !important;
+  border-color: #261E1C !important;
+}
+.dark .border-border-warm.bg-white-warm\/8:hover {
+  background-color: #201917 !important;
+  border-color: #3D2E2B !important;
+}
+
+/* Github Contributions box */
+.dark .border-border-warm.bg-white-warm\/40 {
+  background-color: #14100E !important;
+  border-color: #211917 !important;
 }
