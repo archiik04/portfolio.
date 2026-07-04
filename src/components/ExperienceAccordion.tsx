@@ -50,18 +50,22 @@ const AccordionRow: React.FC<AccordionRowProps> = ({ item, isOpen, onToggle }) =
             </text>
           </svg>
         );
+      case 'learning-pathways':
+        return null;
       default:
         return <Briefcase className="w-5 h-5 text-text-primary" />;
     }
   };
+
+  const hasDetails = item.responsibilities.length > 0 || item.technologies.length > 0;
 
   return (
     <div className="border border-border-warm bg-white-warm dark:bg-white-warm/5 rounded-2xl p-5 md:p-6.5 transition-all duration-300 hover:shadow-[0_8px_24px_rgba(36,26,23,0.03)] text-left">
       
       {/* 1. Header Accordion Row Toggle */}
       <button
-        onClick={onToggle}
-        className="w-full flex items-start sm:items-center justify-between gap-4 text-left cursor-pointer group select-none"
+        onClick={hasDetails ? onToggle : undefined}
+        className={`w-full flex items-start sm:items-center justify-between gap-4 text-left group select-none ${hasDetails ? 'cursor-pointer' : 'cursor-default'}`}
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-4">
@@ -89,9 +93,11 @@ const AccordionRow: React.FC<AccordionRowProps> = ({ item, isOpen, onToggle }) =
             <p className="font-semibold text-text-primary whitespace-nowrap">{item.duration}</p>
             <p className="text-[12px] opacity-80">{item.location}</p>
           </div>
-          <div className="p-1.5 rounded-lg bg-bg-paper dark:bg-white-warm/5 text-text-secondary transition-transform duration-300">
-            <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`} />
-          </div>
+          {hasDetails && (
+            <div className="p-1.5 rounded-lg bg-bg-paper dark:bg-white-warm/5 text-text-secondary transition-transform duration-300">
+              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`} />
+            </div>
+          )}
         </div>
       </button>
 
@@ -103,7 +109,7 @@ const AccordionRow: React.FC<AccordionRowProps> = ({ item, isOpen, onToggle }) =
 
       {/* 2. Expandable Accordion Block */}
       <AnimatePresence initial={false}>
-        {isOpen && (
+        {hasDetails && isOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ 

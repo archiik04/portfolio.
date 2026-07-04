@@ -11,6 +11,15 @@ export interface ExperienceItem {
 
 export const experiences: ExperienceItem[] = [
   {
+    id: 'learning-pathways',
+    role: 'Product Engineer Intern',
+    organization: 'Learning Pathways',
+    duration: 'Jul. 2026 – Present',
+    location: 'Remote',
+    responsibilities: [],
+    technologies: []
+  },
+  {
     id: 'aashdit',
     role: 'AI Intern',
     organization: 'Aashdit Technologies',
