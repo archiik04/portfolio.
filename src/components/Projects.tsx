@@ -19,11 +19,13 @@ export const Projects: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mb-14"
+          className="space-y-4 mb-14"
         >
           <h2 className="font-serif-editorial text-[30px] md:text-[38px] font-medium text-text-primary leading-none">
             Projects
           </h2>
+          {/* Symmetrical dotted line divider */}
+          <div className="w-full h-px border-t border-dotted border-border-warm/80 pt-1" />
         </motion.div>
 
         {/* 2x2 Projects Grid */}

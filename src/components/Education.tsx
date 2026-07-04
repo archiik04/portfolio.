@@ -18,11 +18,13 @@ export const Education: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mb-14"
+          className="space-y-4 mb-14"
         >
           <h2 className="font-serif-editorial text-[30px] md:text-[38px] font-medium text-text-primary leading-none">
             Education
           </h2>
+          {/* Symmetrical dotted line divider */}
+          <div className="w-full h-px border-t border-dotted border-border-warm/80 pt-1" />
         </motion.div>
 
         {/* Education Item Card styled to match experience blocks */}
