@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Container } from '../components/Container';
-import { ArrowLeft, ExternalLink, FileText, Download, Moon, Sun } from 'lucide-react';
+import { ArrowLeft, Moon, Sun } from 'lucide-react';
 
 export const ResumeViewer: React.FC = () => {
   const navigate = useNavigate();
@@ -37,7 +37,10 @@ export const ResumeViewer: React.FC = () => {
   };
 
   const handleDownload = () => {
-    window.open('https://drive.google.com/uc?export=download&id=1e7dGikFP3sM_ieE2Ph4JIw86K9swEZzI', '_blank');
+    const link = document.createElement('a');
+    link.href = '/resume.pdf';
+    link.download = 'Archi_Kanungo_Resume.pdf';
+    link.click();
   };
 
   return (
@@ -87,47 +90,11 @@ export const ResumeViewer: React.FC = () => {
         {/* 2. Dashed Divider */}
         <div className="w-full max-w-[800px] mx-auto border-t border-dashed border-border-warm/60 my-6" />
 
-        {/* 3. Document Action Card */}
-        <div className="w-full max-w-[800px] mx-auto border border-border-warm rounded-2xl p-4 bg-white-warm/30 dark:bg-white-warm/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-          <div className="flex items-center gap-3 text-left">
-            <div className="p-3 rounded-xl border border-border-warm bg-white dark:bg-white-warm/5 flex items-center justify-center text-text-secondary shadow-sm">
-              <FileText className="w-5 h-5" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-sans font-semibold text-text-primary text-[15px]">
-                Archi Kanungo Resume
-              </span>
-              <span className="font-sans text-[12.5px] text-text-secondary mt-0.5">
-                PDF document
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <a
-              href="https://drive.google.com/file/d/1e7dGikFP3sM_ieE2Ph4JIw86K9swEZzI/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2.5 rounded-xl border border-border-warm bg-white dark:bg-white-warm/5 hover:bg-white-warm dark:hover:bg-white-warm/10 text-text-secondary hover:text-text-primary transition-all duration-200 active:scale-95 cursor-pointer flex items-center justify-center shadow-sm"
-              title="Open in new tab"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
-
-            <button
-              onClick={handleDownload}
-              className="px-5 py-2.5 rounded-xl bg-[#241A17] dark:bg-[#F8F6F2] text-[#F8F6F2] dark:text-[#241A17] hover:bg-[#241A17]/90 dark:hover:bg-[#F8F6F2]/90 text-[13px] font-sans font-medium flex items-center gap-2 shadow-sm transition-all duration-200 active:scale-95 cursor-pointer"
-            >
-              <Download className="w-3.5 h-3.5" />
-              Download
-            </button>
-          </div>
-        </div>
 
         {/* 4. Embedded PDF Document Frame */}
         <div className="w-full max-w-[800px] mx-auto rounded-2xl overflow-hidden border border-border-warm bg-white shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
           <iframe
-            src="https://drive.google.com/file/d/1e7dGikFP3sM_ieE2Ph4JIw86K9swEZzI/preview"
+            src="/resume.pdf"
             className="w-full h-[1100px] border-none"
             title="Archi Kanungo Resume"
           >

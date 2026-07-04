@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import type { Project } from '../data/projects';
 import { TechIcon } from './TechIcons';
-import { Pin } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
@@ -55,12 +54,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             loading="lazy"
           />
 
-          {/* Optional Pin on top right (e.g. for Docsy to replicate mockup) */}
-          {project.id === 'docsy' && (
-            <div className="absolute top-6 right-6 p-1.5 rounded-full bg-white-warm/95 shadow-sm text-text-secondary">
-              <Pin className="w-3.5 h-3.5 rotate-45" />
-            </div>
-          )}
 
         </div>
 

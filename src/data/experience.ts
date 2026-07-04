@@ -1,8 +1,3 @@
-export interface ExperienceMetric {
-  value: string;
-  label: string;
-}
-
 export interface ExperienceItem {
   id: string;
   role: string;
@@ -11,7 +6,6 @@ export interface ExperienceItem {
   location: string;
   responsibilities: string[];
   technologies: string[];
-  metrics: ExperienceMetric[];
   certificateUrl?: string;
 }
 
@@ -27,12 +21,6 @@ export const experiences: ExperienceItem[] = [
     ],
     technologies: [
       'RAG', 'Vector DB', 'Python', 'Document Parsing', 'Semantic Search'
-    ],
-    metrics: [
-      { value: '3', label: 'DOC TYPES' },
-      { value: '10K+', label: 'DOCUMENTS CAPACITY' },
-      { value: 'sub-200ms', label: 'RESPONSE TIME' },
-      { value: 'RAG', label: 'ARCHITECTURE' }
     ]
   },
   {
@@ -46,12 +34,6 @@ export const experiences: ExperienceItem[] = [
     ],
     technologies: [
       'Product Strategy', 'UX Research', 'Google Gemini', 'Developer Beta', 'AI Ethics', 'Public Speaking'
-    ],
-    metrics: [
-      { value: '5+', label: 'LEADERSHIP EVENTS' },
-      { value: '1-1', label: 'PARTNERSHIPS' },
-      { value: 'Beta', label: 'GEMINI FEATURES' },
-      { value: 'UX', label: 'RESEARCH METHOD' }
     ]
   }
 ];

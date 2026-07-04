@@ -120,27 +120,8 @@ const AccordionRow: React.FC<AccordionRowProps> = ({ item, isOpen, onToggle }) =
           >
             <div className="pt-5 select-text">
               
-              {/* Metrics block separated by dotted horizontal lines */}
-              <div className="w-full py-4 border-t border-b border-dotted border-border-warm/80 flex flex-wrap sm:flex-nowrap justify-between gap-y-4 gap-x-2 text-left">
-                {item.metrics.map((m, idx) => (
-                  <div 
-                    key={idx} 
-                    className={`flex-1 min-w-[120px] px-3.5 flex flex-col justify-center ${
-                      idx < item.metrics.length - 1 ? 'sm:border-r sm:border-dotted sm:border-border-warm/80' : ''
-                    }`}
-                  >
-                    <span className="font-sans text-[17px] sm:text-[19px] font-bold text-text-primary tracking-tight">
-                      {m.value}
-                    </span>
-                    <span className="font-sans text-[9px] font-bold tracking-widest text-text-secondary/80 uppercase mt-1">
-                      {m.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
               {/* Responsibilities list */}
-              <div className="mt-5.5 space-y-3.5">
+              <div className="space-y-3.5">
                 <ul className="list-disc pl-5 space-y-3 text-[13.5px] leading-relaxed text-text-secondary font-sans">
                   {item.responsibilities.map((resp, idx) => (
                     <li key={idx}>
@@ -151,7 +132,7 @@ const AccordionRow: React.FC<AccordionRowProps> = ({ item, isOpen, onToggle }) =
                           .replace(/(semantic document search for enterprise)/gi, '<strong class="font-bold text-text-primary">$1</strong>')
                           .replace(/(3 document types)/gi, '<strong class="font-bold text-text-primary">$1</strong>')
                           .replace(/(10K\+ concurrent documents)/gi, '<strong class="font-bold text-text-primary">$1</strong>')
-                          .replace(/(Google\'s insight voice)/gi, '<strong class="font-bold text-text-primary">$1</strong>')
+                          .replace(/(Google's insight voice)/gi, '<strong class="font-bold text-text-primary">$1</strong>')
                           .replace(/(product teams)/gi, '<strong class="font-bold text-text-primary">$1</strong>')
                           .replace(/(Gemini features)/gi, '<strong class="font-bold text-text-primary">$1</strong>')
                           .replace(/(5\+ leadership events)/gi, '<strong class="font-bold text-text-primary">$1</strong>');
