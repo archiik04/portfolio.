@@ -286,7 +286,6 @@ export const GithubContributions: React.FC = () => {
       <div className="mt-4 flex justify-between items-center text-[12.5px] text-text-secondary/90 font-sans">
         <div>Less active</div>
         <div className="flex items-center gap-[3.5px]">
-          <div className="w-[10px] h-[10px] md:w-[11px] md:h-[11px] rounded-[2.5px] bg-[#F3F4F6] dark:bg-white-warm/5" />
           <div className="w-[10px] h-[10px] md:w-[11px] md:h-[11px] rounded-[2.5px] bg-[#D1D5DB] dark:bg-[#4E3F3B]" />
           <div className="w-[10px] h-[10px] md:w-[11px] md:h-[11px] rounded-[2.5px] bg-[#9CA3AF] dark:bg-[#7D6660]" />
           <div className="w-[10px] h-[10px] md:w-[11px] md:h-[11px] rounded-[2.5px] bg-[#4B5563] dark:bg-[#AB8D85]" />

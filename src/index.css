@@ -147,7 +147,7 @@ html.lenis body {
 }
 
 /* Github Contributions box */
-.dark .border-border-warm.dark\:bg-white-warm\/40 {
+.dark .border-border-warm.dark\:bg-white-warm\/5 {
   background-color: #131316 !important;
   border-color: #202023 !important;
 }
