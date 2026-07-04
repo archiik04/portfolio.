@@ -10,17 +10,18 @@ interface ProjectCardProps {
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   // Render status badge based on project status
   const renderStatus = () => {
+    const baseClass = "inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-border-warm bg-white-warm dark:bg-white-warm/8 text-text-secondary font-sans font-medium text-[12px] shadow-sm";
     switch (project.status) {
       case 'Live':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-sans font-medium border border-emerald-100 bg-[#E8F8F0] text-emerald-700">
+          <span className={baseClass}>
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Live
           </span>
         );
       case 'Building':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-sans font-medium border border-rose-100 bg-[#FDF2F2] text-rose-600">
+          <span className={baseClass}>
             <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
             Building
           </span>
@@ -28,7 +29,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       case 'Not Started':
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-sans font-medium border border-gray-200 bg-[#F3F4F6] text-gray-600">
+          <span className={baseClass}>
             <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
             Not Started
           </span>

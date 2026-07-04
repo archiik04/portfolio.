@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --color-bg-paper: #F8F6F2;
   --color-text-primary: #241A17;
@@ -109,14 +111,14 @@ html.lenis body {
 }
 
 /* Experience & Education cards */
-.dark .border-border-warm.bg-white-warm\/5,
-.dark .border-border-warm.bg-white-warm\/8,
-.dark .border-border-warm.bg-white-warm\/40 {
+.dark .border-border-warm.dark\:bg-white-warm\/5,
+.dark .border-border-warm.dark\:bg-white-warm\/8,
+.dark .border-border-warm.dark\:bg-white-warm\/40 {
   background-color: #131316 !important;
   border-color: #202023 !important;
 }
-.dark .border-border-warm.bg-white-warm\/5:hover,
-.dark .border-border-warm.bg-white-warm\/8:hover {
+.dark .border-border-warm.dark\:bg-white-warm\/5:hover,
+.dark .border-border-warm.dark\:bg-white-warm\/8:hover {
   border-color: #2E2E33 !important;
 }
 
@@ -135,17 +137,17 @@ html.lenis body {
 }
 
 /* Social links and small badges */
-.dark .border-border-warm.bg-white-warm\/8 {
+.dark .border-border-warm.dark\:bg-white-warm\/8 {
   background-color: #17171A !important;
   border-color: #242429 !important;
 }
-.dark .border-border-warm.bg-white-warm\/8:hover {
+.dark .border-border-warm.dark\:bg-white-warm\/8:hover {
   background-color: #1E1E22 !important;
   border-color: #33333A !important;
 }
 
 /* Github Contributions box */
-.dark .border-border-warm.bg-white-warm\/40 {
+.dark .border-border-warm.dark\:bg-white-warm\/40 {
   background-color: #131316 !important;
   border-color: #202023 !important;
 }

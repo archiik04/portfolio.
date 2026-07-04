@@ -54,26 +54,27 @@ export const ProjectDetail: React.FC = () => {
   }
 
   const renderStatus = () => {
+    const baseClass = "inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-border-warm bg-white-warm dark:bg-white-warm/8 text-text-secondary font-sans font-medium text-[12px] shadow-sm";
     switch (project.status) {
       case 'Live':
         return (
-          <span className="flex items-center gap-1.5 font-sans text-sm font-semibold text-emerald-600 dark:text-emerald-500">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className={baseClass}>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Live
           </span>
         );
       case 'Building':
         return (
-          <span className="flex items-center gap-1.5 font-sans text-sm font-semibold text-rose-500 dark:text-rose-400">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
+          <span className={baseClass}>
+            <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
             Building
           </span>
         );
       case 'Not Started':
       default:
         return (
-          <span className="flex items-center gap-1.5 font-sans text-sm font-semibold text-gray-500">
-            <span className="w-2.5 h-2.5 rounded-full bg-gray-400" />
+          <span className={baseClass}>
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-400" />
             Not Started
           </span>
         );
