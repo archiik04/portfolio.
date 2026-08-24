@@ -11,7 +11,7 @@ import { Footer } from './components/Footer';
 import { Sidequests } from './components/Sidequests';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { ResumeViewer } from './pages/ResumeViewer';
-import { Quest } from './pages/Quest';
+import { About } from './pages/About';
 
 function App() {
   // Initialize Lenis smooth inertial scrolling
@@ -56,7 +56,7 @@ function App() {
             <Navbar />
 
             {/* Main Content Sections */}
-            <main className="flex-grow pt-20">
+            <main className="flex-grow pt-10">
               {/* Landing header view */}
               <Hero />
               
@@ -86,8 +86,8 @@ function App() {
       {/* 3. Resume Viewer Route */}
       <Route path="/resume" element={<ResumeViewer />} />
 
-      {/* 4. Quest Route */}
-      <Route path="/quest" element={<Quest />} />
+      {/* 4. About Route */}
+      <Route path="/about" element={<About />} />
     </Routes>
   );
 }

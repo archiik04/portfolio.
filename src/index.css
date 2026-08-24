@@ -6,18 +6,18 @@
   --color-bg-paper: #F8F6F2;
   --color-text-primary: #241A17;
   --color-text-secondary: #8A8178;
-  --color-accent-brown: #4A2F25;
+  --color-accent-brown: #57575D;
   --color-border-warm: #EAE3D9;
   --color-white-warm: #FFFFFF;
 }
 
 .dark {
-  --color-bg-paper: #0A0A0C; /* Deep carbon charcoal - clean, modern obsidian background */
-  --color-text-primary: #F3F3F5; /* Crisp warm white/cream text for readability */
-  --color-text-secondary: #8E9196; /* Clean neutral slate grey for descriptions */
-  --color-accent-brown: #E2A895; /* Premium rose copper/bronze highlight for active/hover states */
-  --color-border-warm: #202023; /* Modern dark zinc border - replaces muddy brown outlines */
-  --color-white-warm: #131316; /* Clean card solid black-grey background */
+  --color-bg-paper: #0A0A0A; /* Near-black, fully neutral */
+  --color-text-primary: #F5F5F5; /* Neutral near-white text */
+  --color-text-secondary: #A1A1A1; /* Neutral grey for descriptions */
+  --color-accent-brown: #E5E5E5; /* Light grey highlight for active/hover states */
+  --color-border-warm: #262626; /* Neutral border against the lifted surface */
+  --color-white-warm: #141414; /* Card surface — sits just above the page background */
 }
 
 @theme {
@@ -29,10 +29,11 @@
   --color-white-warm: var(--color-white-warm);
 
   --font-sans: "Inter", sans-serif;
-  --font-serif-editorial: "Cormorant Garamond", Georgia, serif;
+  --font-serif-editorial: "Space Grotesk", "Inter", sans-serif;
   --font-mono-tag: "Roboto Mono", monospace;
 
   --animate-marquee: marquee 20s linear infinite;
+  --animate-marquee-slow: marquee 45s linear infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -40,12 +41,47 @@
   }
 }
 
-/* Base Styles */
+/* Base Styles — grid-paper texture lives on <html>; light values here, dark overridden below.
+   Sections paint .bg-bg-paper on top, so that class goes transparent to let the grid show. */
 html {
-  background-color: var(--color-bg-paper);
   color: var(--color-text-primary);
   font-family: "Inter", sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  background-color: #EFEEE9;
+}
+
+/* Light theme: even fine dot grid. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at center, rgba(30, 30, 32, 0.16) 0.9px, transparent 1.1px),
+    radial-gradient(circle at center, rgba(30, 30, 32, 0.09) 0.7px, transparent 0.9px);
+  background-size: 6px 6px, 6px 6px;
+  background-position: 0 0, 3px 3px;
+}
+
+html.dark body::after {
+  display: none;
+}
+
+/* Dark: same halftone, inverted and much fainter. Must restate size/position —
+   otherwise the base rule's values apply to these layers and produce a moiré. */
+html.dark {
+  background-color: #0A0A0A;
+  background-image:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.075) 0.9px, transparent 1.1px),
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.04) 0.7px, transparent 0.9px);
+  background-size: 6px 6px, 6px 6px;
+  background-position: 0 0, 3px 3px;
+}
+
+.bg-bg-paper {
+  background-color: transparent;
 }
 
 body {
@@ -102,11 +138,11 @@ html.lenis body {
 
 /* Dark Theme Custom Personalization Overrides */
 .dark a.group > div {
-  background-color: #131316 !important;
-  border-color: #202023 !important;
+  background-color: #141414 !important;
+  border-color: #262626 !important;
 }
 .dark a.group:hover > div {
-  border-color: #E2A895 !important;
+  border-color: #E5E5E5 !important;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -114,40 +150,40 @@ html.lenis body {
 .dark .border-border-warm.dark\:bg-white-warm\/5,
 .dark .border-border-warm.dark\:bg-white-warm\/8,
 .dark .border-border-warm.dark\:bg-white-warm\/40 {
-  background-color: #131316 !important;
-  border-color: #202023 !important;
+  background-color: #141414 !important;
+  border-color: #262626 !important;
 }
 .dark .border-border-warm.dark\:bg-white-warm\/5:hover,
 .dark .border-border-warm.dark\:bg-white-warm\/8:hover {
-  border-color: #2E2E33 !important;
+  border-color: #333333 !important;
 }
 
 /* Accordion expand indicator bg */
 .dark .bg-bg-paper.dark\:bg-white-warm\/5 {
-  background-color: #1E1E22 !important;
+  background-color: #1C1C1C !important;
 }
 
 /* Bento grid cards in Quest Log */
 .dark .border-white\/30.dark\:border-white-warm\/10 {
-  background-color: rgba(19, 19, 22, 0.95) !important;
-  border-color: #232328 !important;
+  background-color: rgba(20, 20, 20, 0.95) !important;
+  border-color: #262626 !important;
 }
 .dark .border-white\/30.dark\:border-white-warm\/10:hover {
-  border-color: #E2A895 !important;
+  border-color: #E5E5E5 !important;
 }
 
 /* Social links and small badges */
 .dark .border-border-warm.dark\:bg-white-warm\/8 {
-  background-color: #17171A !important;
-  border-color: #242429 !important;
+  background-color: #141414 !important;
+  border-color: #262626 !important;
 }
 .dark .border-border-warm.dark\:bg-white-warm\/8:hover {
-  background-color: #1E1E22 !important;
-  border-color: #33333A !important;
+  background-color: #1C1C1C !important;
+  border-color: #333333 !important;
 }
 
 /* Github Contributions box */
 .dark .border-border-warm.dark\:bg-white-warm\/5 {
-  background-color: #131316 !important;
-  border-color: #202023 !important;
+  background-color: #141414 !important;
+  border-color: #262626 !important;
 }

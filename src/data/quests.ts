@@ -33,7 +33,7 @@ export const questsData: QuestItem[] = [
   {
     id: 'vr-ui',
     url: vruiCover,
-    videoUrl: '/vr ui.mp4',
+    videoUrl: 'https://drive.google.com/file/d/1tyOoFlGUSd75fAh89-apjn8V-hrysl2X/preview',
     title: 'vr ui',
     description: 'A vr ui design interface where you can do basic ui interaction like change colors, drop boxes, change box layouts setup in a factory setup.',
     longWriting: 'A vr ui design interface where you can do basic ui interaction like change colors, drop boxes, change box layouts setup in a factory setup.',

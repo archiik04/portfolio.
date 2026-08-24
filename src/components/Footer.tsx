@@ -10,19 +10,23 @@ export const Footer: React.FC = () => {
       navigate('/resume');
       return;
     }
+    if (id === 'about') {
+      navigate('/about');
+      return;
+    }
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <footer className="w-full bg-[#241A17] text-[#F8F6F2] py-16 transition-colors duration-300 no-print select-none border-t border-[#F8F6F2]/10">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-10 md:px-12 flex flex-col md:flex-row justify-between items-start gap-12 md:gap-6 text-left">
+    <footer className="w-full bg-[#1A1A1D] text-[#F1F1F2] py-10 transition-colors duration-300 no-print select-none border-t border-[#F1F1F2]/10">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-10 md:px-12 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-6 text-left">
         
         {/* Left Side: Calligraphic Brand Logo & Copyright */}
         <div className="flex flex-col items-start space-y-4">
           <button
             onClick={() => handleScrollTo('hero')}
-            className="cursor-pointer hover:opacity-85 select-none text-[#F8F6F2] flex items-center justify-center py-1"
+            className="cursor-pointer hover:opacity-85 select-none text-[#F1F1F2] flex items-center justify-center py-1"
             aria-label="Scroll to top"
           >
             <svg 
@@ -44,21 +48,21 @@ export const Footer: React.FC = () => {
           </button>
           
           <div className="flex flex-col space-y-1">
-            <span className="text-[12px] font-sans text-[#F8F6F2]/60 select-text">
+            <span className="text-[12px] font-sans text-[#F1F1F2]/60 select-text">
               © {currentYear} Archi. All Rights Reserved.
             </span>
           </div>
         </div>
 
         {/* Right Side: Dual Directory Columns */}
-        <div className="grid grid-cols-2 gap-8 sm:gap-14 md:gap-20">
+        <div className="grid grid-cols-2 gap-8 sm:gap-10 md:gap-14">
           
           {/* Column 1: Connect */}
           <div className="space-y-4">
-            <span className="font-mono-tag text-[10px] font-bold text-[#F8F6F2]/50 uppercase tracking-widest block">
+            <span className="font-mono-tag text-[10px] font-bold text-[#F1F1F2]/50 uppercase tracking-widest block">
               Connect
             </span>
-            <ul className="space-y-2.5 text-xs sm:text-sm font-sans text-[#F8F6F2]/80">
+            <ul className="space-y-2.5 text-xs sm:text-sm font-sans text-[#F1F1F2]/80">
               <li>
                 <a href="mailto:archikanungo2004@gmail.com" className="hover:text-white transition-colors cursor-pointer">
                   Send a Message
@@ -79,12 +83,12 @@ export const Footer: React.FC = () => {
 
           {/* Column 2: About */}
           <div className="space-y-4">
-            <span className="font-mono-tag text-[10px] font-bold text-[#F8F6F2]/50 uppercase tracking-widest block">
+            <span className="font-mono-tag text-[10px] font-bold text-[#F1F1F2]/50 uppercase tracking-widest block">
               About
             </span>
-            <ul className="space-y-2.5 text-xs sm:text-sm font-sans text-[#F8F6F2]/80">
+            <ul className="space-y-2.5 text-xs sm:text-sm font-sans text-[#F1F1F2]/80">
               <li>
-                <button onClick={() => handleScrollTo('hero')} className="hover:text-white transition-colors cursor-pointer text-left">
+                <button onClick={() => handleScrollTo('about')} className="hover:text-white transition-colors cursor-pointer text-left">
                   About
                 </button>
               </li>

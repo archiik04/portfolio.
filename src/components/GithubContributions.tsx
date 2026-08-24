@@ -185,7 +185,7 @@ export const GithubContributions: React.FC = () => {
   if (loading || !data) {
     // High-quality animated skeleton loading state
     return (
-      <div className="mt-16 w-full border border-border-warm bg-white-warm/40 dark:bg-white-warm/5 rounded-2xl p-6.5 select-none animate-pulse">
+      <div className="mt-10 w-full border border-border-warm bg-white-warm/40 dark:bg-white-warm/5 rounded-2xl p-5 select-none animate-pulse">
         <div className="flex justify-between items-baseline mb-4">
           <div className="h-6 w-36 bg-border-warm/50 rounded" />
           <div className="h-4 w-48 bg-border-warm/40 rounded" />
@@ -215,7 +215,7 @@ export const GithubContributions: React.FC = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      className="mt-16 w-full border border-border-warm bg-white-warm/40 dark:bg-white-warm/5 rounded-2xl p-6.5 select-none relative"
+      className="mt-10 w-full border border-border-warm bg-white-warm/40 dark:bg-white-warm/5 rounded-2xl p-5 select-none relative"
       onMouseMove={handleMouseMove}
     >
       {/* Tooltip Popup container */}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Container } from './Container';
+import { SectionShell } from './SectionShell';
 import { revealVariants } from '../hooks/useReveal';
 import kiitLogo from '../assets/kiit.png';
 
@@ -9,18 +10,19 @@ export const Education: React.FC = () => {
   return (
     <section 
       id="education" 
-      className="py-20 md:py-24 bg-bg-paper text-text-primary scroll-mt-12 text-left"
+      className="py-14 md:py-16 bg-bg-paper text-text-primary scroll-mt-12 text-left"
     >
       <Container>
+        <SectionShell>
         {/* Section Header matching spacing & styling */}
         <motion.div
           variants={revealVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="space-y-4 mb-14"
+          className="space-y-3 mb-8"
         >
-          <h2 className="font-serif-editorial text-[30px] md:text-[38px] font-medium text-text-primary leading-none">
+          <h2 className="font-serif-editorial text-[22px] md:text-[32px] font-medium text-text-primary leading-none uppercase tracking-[0.04em]">
             Education
           </h2>
           {/* Symmetrical dotted line divider */}
@@ -33,7 +35,7 @@ export const Education: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="border border-border-warm bg-white-warm dark:bg-white-warm/5 rounded-2xl p-5 md:p-6.5 transition-all duration-300 hover:shadow-[0_8px_24px_rgba(36,26,23,0.03)] text-left flex items-start gap-4"
+          className="group py-4 text-left flex items-start gap-4"
         >
           {/* Graduation Badge Icon - Official KIIT Green Logo Image */}
           <div className="w-12 h-12 rounded-xl border border-border-warm/60 flex items-center justify-center bg-white-warm dark:bg-white-warm/8 overflow-hidden flex-shrink-0 relative select-none">
@@ -48,12 +50,18 @@ export const Education: React.FC = () => {
           <div className="flex-grow flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <h3 className="font-sans text-[16px] sm:text-[17px] font-bold text-text-primary leading-tight">
-                Kalinga Institute of Industrial Technology (KIIT)
+                <span
+                  className="relative inline-block
+                    after:content-[''] after:absolute after:left-0 after:-bottom-0.5 after:h-[1.5px] after:bg-accent-brown
+                    after:w-0 group-hover:after:w-full after:transition-all after:duration-300 after:ease-out"
+                >
+                  Kalinga Institute of Industrial Technology (KIIT)
+                </span>
               </h3>
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-text-secondary text-[13.5px] leading-normal font-sans">
                 <span>B.Tech (Computer Science & Engineering)</span>
                 <span className="text-border-warm">•</span>
-                <span className="font-medium text-text-primary">CGPA: 8.14/10</span>
+                <span className="font-medium text-text-primary">CGPA: 8.19/10</span>
               </div>
             </div>
 
@@ -67,6 +75,7 @@ export const Education: React.FC = () => {
             </div>
           </div>
         </motion.div>
+      </SectionShell>
       </Container>
     </section>
   );

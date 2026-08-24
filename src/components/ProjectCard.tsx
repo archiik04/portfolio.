@@ -42,16 +42,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       to={`/project/${project.id}`}
       className="group block w-full select-none text-left"
     >
-      <div className="w-full border border-border-warm rounded-3xl p-6 bg-white-warm/25 dark:bg-white-warm/5 flex flex-col space-y-5 hover:shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:border-text-secondary/20 transition-all duration-300">
-        
+      <div className="w-full border border-border-warm rounded-2xl p-4 bg-white-warm/25 dark:bg-white-warm/5 flex flex-col space-y-3.5 hover:shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:border-text-secondary/20 transition-all duration-300">
+
         {/* 1. Graphic display with subtle screenshot background */}
-        <div className="w-full aspect-[1.5] bg-[#FAF8F4] dark:bg-bg-paper border border-border-warm/60 rounded-2xl overflow-hidden relative flex items-center justify-center p-4">
-          
+        <div className="w-full aspect-[1.9] bg-[#FAF8F4] dark:bg-bg-paper border border-border-warm/60 rounded-xl overflow-hidden relative flex items-center justify-center p-2.5">
+
           {/* Screenshot Image */}
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-contain rounded-xl filter sepia-[3%] contrast-[101%] brightness-[0.98] transition-transform duration-700 group-hover:scale-[1.02]"
+            className="w-full h-full object-contain rounded-lg filter sepia-[3%] contrast-[101%] brightness-[0.98] transition-transform duration-700 group-hover:scale-[1.02]"
             loading="lazy"
           />
 
@@ -60,19 +60,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
         {/* 2. Title & Status Line */}
         <div className="flex items-center justify-between">
-          <h3 className="font-serif-editorial text-2xl text-text-primary font-normal leading-tight group-hover:text-accent-brown transition-colors">
+          <h3 className="font-serif-editorial text-lg text-text-primary font-normal leading-tight group-hover:text-accent-brown transition-colors">
             {project.title}
           </h3>
           {renderStatus()}
         </div>
 
         {/* 3. Description text */}
-        <p className="font-mono-tag text-[13px] text-text-secondary leading-relaxed line-clamp-2 h-10 select-text">
+        <p className="font-mono-tag text-[12.5px] text-text-secondary leading-relaxed line-clamp-2 h-9 select-text">
           {project.description}
         </p>
 
         {/* 4. Footer line: Tech Stack + View Project link */}
-        <div className="flex items-center justify-between pt-2 border-t border-border-warm/40">
+        <div className="flex items-center justify-between pt-1.5 border-t border-border-warm/40">
           
           {/* Tech Stack icons */}
           <div className="flex items-center space-x-2">

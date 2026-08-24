@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import { Container } from './Container';
+import { SectionShell } from './SectionShell';
 import { questsData } from '../data/quests';
 import type { QuestItem } from '../data/quests';
 import { revealVariants } from '../hooks/useReveal';
-import { X, Play, ArrowUpRight } from 'lucide-react';
+import { X, Play } from 'lucide-react';
 
 export const Sidequests: React.FC = () => {
-  const navigate = useNavigate();
   const [selectedQuest, setSelectedQuest] = useState<QuestItem | null>(null);
 
   // Duplicate the quests twice for a seamless infinite loop marquee
@@ -17,32 +16,26 @@ export const Sidequests: React.FC = () => {
   return (
     <section
       id="quest"
-      className="py-20 md:py-24 bg-bg-paper text-text-primary scroll-mt-12 text-left"
+      className="py-14 md:py-16 bg-bg-paper text-text-primary scroll-mt-12 text-left"
     >
       <Container>
+        <SectionShell>
         {/* Customized Editorial Header Row */}
         <motion.div
           variants={revealVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-border-warm pb-6 select-none"
+          className="border-b border-border-warm pb-6 select-none"
         >
-          <h2 className="font-serif-editorial text-[30px] md:text-[36px] leading-[1.2] font-normal">
+          <h2 className="font-serif-editorial text-[22px] md:text-[28px] leading-[1.2] font-normal">
             <span className="text-text-secondary block">Artwork, ar/vr, and other</span>
             <span className="text-text-primary">projects I do in <span className="font-bold text-accent-brown">free time.</span></span>
           </h2>
-          <button
-            onClick={() => navigate('/quest')}
-            className="font-mono-tag text-xs font-bold text-text-secondary hover:text-text-primary uppercase tracking-wider shrink-0 cursor-pointer flex items-center space-x-1 border-none bg-transparent"
-          >
-            <span>View all</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
         </motion.div>
 
         {/* Infinite Moving Marquee Carousel */}
-        <div className="relative mt-14 overflow-hidden">
+        <div className="relative mt-8 overflow-hidden">
           {/* Edge Fade Gradients (gives a smooth visual bleed under the margins) */}
           <div className="hidden md:block absolute left-0 top-0 bottom-8 w-24 bg-gradient-to-r from-bg-paper to-transparent z-10 pointer-events-none" />
           <div className="hidden md:block absolute right-0 top-0 bottom-8 w-24 bg-gradient-to-l from-bg-paper to-transparent z-10 pointer-events-none" />
@@ -73,7 +66,7 @@ export const Sidequests: React.FC = () => {
                     setSelectedQuest(item);
                   }
                 }}
-                className={`h-[310px] md:h-[350px] w-[220px] md:w-[250px] bg-[#E5E3DF] border border-[#DCDAD5] rounded-2xl p-3 pb-8 flex flex-col justify-between flex-shrink-0 shadow-md hover:shadow-lg transition-all duration-300 snap-start ${item.disablePopup ? 'cursor-default' : 'cursor-pointer'}`}
+                className={`h-[250px] md:h-[280px] w-[175px] md:w-[200px] bg-[#E5E3DF] border border-[#DCDAD5] dark:bg-[#1C1C1C] dark:border-[#2E2E2E] rounded-xl p-2.5 pb-6 flex flex-col justify-between flex-shrink-0 shadow-md hover:shadow-lg transition-all duration-300 snap-start ${item.disablePopup ? 'cursor-default' : 'cursor-pointer'}`}
               >
                 {/* Polaroid Visual Cover Container */}
                 <div className="w-full aspect-[4/5] bg-white-warm/10 rounded-xl overflow-hidden relative border border-white/20 dark:border-white-warm/5">
@@ -94,10 +87,10 @@ export const Sidequests: React.FC = () => {
 
                 {/* Polaroid Write-in Space */}
                 <div className="flex items-center justify-between px-1 mt-3.5 select-none font-sans">
-                  <span className="text-[14.5px] font-bold text-[#251E1C] tracking-tight">
+                  <span className="text-[14.5px] font-bold text-[#251E1C] dark:text-[#F5F5F5] tracking-tight">
                     {item.title}
                   </span>
-                  <span className="font-mono-tag text-[9.5px] font-bold text-[#251E1C]/60 uppercase tracking-widest">
+                  <span className="font-mono-tag text-[9.5px] font-bold text-[#251E1C]/60 dark:text-[#F5F5F5]/55 uppercase tracking-widest">
                     {item.category}
                   </span>
                 </div>
@@ -141,6 +134,8 @@ export const Sidequests: React.FC = () => {
                         src={selectedQuest.videoUrl}
                         className="w-full h-full object-cover absolute inset-0"
                         controls
+                        controlsList="nodownload noremoteplayback"
+                        disablePictureInPicture
                         autoPlay
                         loop
                         muted
@@ -186,13 +181,14 @@ export const Sidequests: React.FC = () => {
                   </div>
 
                   <div className="mt-8 pt-4 border-t border-border-warm/30 flex items-center gap-1.5 text-text-secondary text-[11px] font-mono select-none">
-                    <span>Freetime Quest Log</span>
+                    <span>VR</span>
                   </div>
                 </div>
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
+      </SectionShell>
       </Container>
     </section>
   );

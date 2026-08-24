@@ -14,10 +14,14 @@ export const experiences: ExperienceItem[] = [
     id: 'learning-pathways',
     role: 'Product Engineer Intern',
     organization: 'Learning Pathways',
-    duration: 'Jul. 2026 – Present',
+    duration: 'Jul. 2026 – Aug. 2026',
     location: 'Remote',
-    responsibilities: [],
-    technologies: []
+    responsibilities: [
+      'Building core product features end-to-end with React on the frontend and FastAPI on the backend; researching upcoming features and mapping them into user flows before implementation; designing and building reusable components and UI screens that power the dashboard experience.'
+    ],
+    technologies: [
+      'React', 'FastAPI', 'TypeScript', 'Component Design', 'Product Research'
+    ]
   },
   {
     id: 'aashdit',
