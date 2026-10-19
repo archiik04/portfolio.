@@ -7,6 +7,12 @@ export interface ExperienceItem {
   responsibilities: string[];
   technologies: string[];
   certificateUrl?: string;
+  /**
+   * Company logo. Drop a square png into src/assets/logos/ and import it here,
+   * e.g. `import aashdit from '../assets/logos/aashdit.png'`. Without one the
+   * row falls back to a monogram tile.
+   */
+  logo?: string;
 }
 
 export const experiences: ExperienceItem[] = [

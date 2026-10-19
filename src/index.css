@@ -12,6 +12,7 @@
   --color-faint: #9A9A9E;   /* captions, dates, meta */
   --color-line: rgba(15, 15, 15, 0.12);
   --color-raise: #FAFAFA;   /* the one lifted surface */
+  --color-accent: #1F7A4D;  /* hover only, never a fill */
 }
 
 .dark {
@@ -21,6 +22,7 @@
   --color-faint: #6B6B72;
   --color-line: rgba(255, 255, 255, 0.14);
   --color-raise: #141414;
+  --color-accent: #45B07C;
 }
 
 @theme {
@@ -30,6 +32,7 @@
   --color-faint: var(--color-faint);
   --color-line: var(--color-line);
   --color-raise: var(--color-raise);
+  --color-accent: var(--color-accent);
 
   --font-sans: "Inter Tight", Inter, system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;

@@ -15,7 +15,7 @@ interface GitHubSearchItem {
 }
 
 const CACHE_KEY = 'oss-contributions-v1';
-const CACHE_TTL_MS = 30 * 60 * 1000; // 30 min — unauthenticated search is ~10 req/hour
+const CACHE_TTL_MS = 30 * 60 * 1000; // 30 min - unauthenticated search is ~10 req/hour
 
 const toStatus = (item: GitHubSearchItem): ContributionStatus => {
   if (item.pull_request?.merged_at) return 'Merged';
@@ -67,7 +67,7 @@ export function useOpenSourceContributions() {
           `https://api.github.com/search/issues?q=author:${GITHUB_USERNAME}+type:pr&per_page=100&sort=updated&order=desc`,
           { headers: { Accept: 'application/vnd.github+json' } }
         );
-        if (!res.ok) return; // rate-limited or offline — keep the fallback list
+        if (!res.ok) return; // rate-limited or offline - keep the fallback list
 
         const json = (await res.json()) as { items?: GitHubSearchItem[] };
         const mapped = mapItems(json.items ?? []);
@@ -78,10 +78,10 @@ export function useOpenSourceContributions() {
         try {
           sessionStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), items: mapped }));
         } catch {
-          /* storage unavailable — not fatal */
+          /* storage unavailable - not fatal */
         }
       } catch {
-        /* network error — the fallback list is already in state */
+        /* network error - the fallback list is already in state */
       }
     })();
 

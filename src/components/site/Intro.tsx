@@ -29,14 +29,14 @@ export const Intro: React.FC = () => (
         </p>
         <p>
           before that i shipped a production rag platform at{' '}
-          <span className="text-ink">aashdit technologies</span> &mdash; semantic search across
+          <span className="text-ink">aashdit technologies</span>, doing semantic search across
           pdfs, docx and scanned documents, running at 10k+ concurrent documents and sub-200ms.
           alongside all of it i&rsquo;ve spent two years as a global youth advisor for google
           through <span className="text-ink">canvas8</span>, testing gemini in beta and speaking at
           leadership events on where young people and ai actually meet.
         </p>
         <p>
-          i build in xr too &mdash; unity, vr, and an inclusion scholarship from xr bootcamp. when
+          i build in xr too: unity, vr, and an inclusion scholarship from xr bootcamp. when
           i&rsquo;m not building, i&rsquo;m probably writing study notes that somehow earned
           &#8377;20,000+ on knowt.
         </p>

@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+
+const NAV = [
+  { label: 'work', href: '#work' },
+  { label: 'built', href: '#built' },
+  { label: 'open source', href: '#oss' },
+  { label: 'proof', href: '#proof' },
+  { label: 'off the clock', href: '#gallery' },
+  { label: 'say hi', href: '#say-hi' },
+];
 
 /** Lenis owns the scroll, so anchors are driven through it rather than natively. */
-const scrollTo = (hash: string) => (e: React.MouseEvent) => {
+const jumpTo = (hash: string) => (e: React.MouseEvent) => {
   const el = document.getElementById(hash.slice(1));
   if (!el) return;
   e.preventDefault();
@@ -12,15 +20,6 @@ const scrollTo = (hash: string) => (e: React.MouseEvent) => {
   history.replaceState(null, '', hash);
 };
 
-const NAV = [
-  { label: 'work', href: '#work' },
-  { label: 'built', href: '#built' },
-  { label: 'open source', href: '#oss' },
-  { label: 'stack', href: '#stack' },
-  { label: 'proof', href: '#proof' },
-  { label: 'say hi', href: '#say-hi' },
-];
-
 export const TopBar: React.FC = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window === 'undefined') return 'light';
@@ -29,8 +28,10 @@ export const TopBar: React.FC = () => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
-  // The bar only grows its hairline once you have scrolled past the name
-  const [scrolled, setScrolled] = useState(false);
+  // Bar retreats as you scroll down and returns the moment you scroll back up
+  const [hidden, setHidden] = useState(false);
+  const [solid, setSolid] = useState(false);
+  const lastY = useRef(0);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
@@ -38,7 +39,12 @@ export const TopBar: React.FC = () => {
   }, [theme]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setSolid(y > 24);
+      setHidden(y > 160 && y > lastY.current);
+      lastY.current = y;
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -46,38 +52,47 @@ export const TopBar: React.FC = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 no-print bg-paper/85 backdrop-blur-md transition-colors duration-300 ${
-        scrolled ? 'border-b border-line' : 'border-b border-transparent'
+      className={`fixed inset-x-0 top-0 z-50 hidden no-print transition-transform duration-500 ease-out md:block ${
+        hidden ? '-translate-y-full' : 'translate-y-0'
       }`}
     >
-      <div className="mx-auto flex h-12 w-full max-w-column items-center justify-between gap-4 px-6">
-        <Link
-          to="/"
-          className="text-[13px] font-medium tracking-[-0.02em] text-ink transition-opacity hover:opacity-60"
-        >
-          archi
-        </Link>
+      <div
+        className={`border-b transition-colors duration-300 ${
+          solid ? 'border-line bg-paper/85 backdrop-blur-md' : 'border-transparent bg-transparent'
+        }`}
+      >
+        <div className="mx-auto flex h-14 max-w-column items-center gap-4 px-5 sm:px-6">
+          <a
+            href="#top"
+            onClick={jumpTo('#top')}
+            aria-label="back to top"
+            className="shrink-0 font-mono text-[11px] text-ink transition-opacity duration-300 hover:opacity-60"
+          >
+            ak
+          </a>
 
-        <nav className="hidden items-center gap-5 sm:flex">
-          {NAV.map(item => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={scrollTo(item.href)}
-              className="link-draw text-[12px] text-faint transition-colors hover:text-ink"
+          <nav className="flex min-w-0 flex-1 items-center justify-end gap-4 overflow-x-auto [scrollbar-width:none] sm:gap-5 [&::-webkit-scrollbar]:hidden">
+            {NAV.map(item => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={jumpTo(item.href)}
+                className="group relative shrink-0 whitespace-nowrap font-mono text-[11px] text-muted transition-colors duration-300 hover:text-ink"
+              >
+                {item.label}
+                <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full" />
+              </a>
+            ))}
+
+            <button
+              onClick={() => setTheme(t => (t === 'light' ? 'dark' : 'light'))}
+              aria-label={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              className="shrink-0 cursor-pointer font-mono text-[11px] text-muted transition-colors duration-300 hover:text-ink"
             >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        <button
-          onClick={() => setTheme(t => (t === 'light' ? 'dark' : 'light'))}
-          aria-label={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-          className="font-mono text-[10.5px] text-faint transition-colors hover:text-ink cursor-pointer"
-        >
-          {theme === 'light' ? 'dark' : 'light'}
-        </button>
+              {theme === 'light' ? 'dark' : 'light'}
+            </button>
+          </nav>
+        </div>
       </div>
     </header>
   );

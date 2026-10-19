@@ -1,9 +1,9 @@
 import React from 'react';
 
 interface RowProps {
-  /** Left-hand title — org, project or award */
+  /** Left-hand title - org, project or award */
   title: React.ReactNode;
-  /** Right-hand meta — dates, status, year */
+  /** Right-hand meta - dates, status, year */
   meta?: string;
   /** Line under the title: role, location, degree */
   subtitle?: string;
