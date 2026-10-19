@@ -23,6 +23,16 @@ export const galleryItems: GalleryItem[] = [
     caption: 'defcon 3301, capture the flag, whole team in.',
   },
   {
+    src: '/gallery/mlsa-badge.jpg',
+    span: 'col-span-1 row-span-2',
+    caption: 'technical executive, mlsa.',
+  },
+  {
+    src: '/gallery/mun-denmark.jpg',
+    span: 'col-span-1 row-span-2',
+    caption: 'denmark, kiit model united nations.',
+  },
+  {
     src: '/gallery/beach-cleanup.jpg',
     span: 'col-span-2 row-span-1',
     caption: 'lake cleanup, gloves on, bags full.',
