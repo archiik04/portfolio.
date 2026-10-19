@@ -17,9 +17,26 @@ export const galleryItems: GalleryItem[] = [
   },
   { src: '/gallery/duck.jpg', span: 'col-span-1 row-span-1', caption: 'this duck had places to be.' },
   { src: '/gallery/headset.jpg', span: 'col-span-1 row-span-1', caption: 'headset, charged and waiting.' },
-  { src: '/gallery/ctf.jpg', span: 'col-span-2 row-span-1', caption: 'capture the flag, whole team in.' },
+  {
+    src: '/gallery/ctf.jpg',
+    span: 'col-span-2 row-span-1',
+    caption: 'defcon 3301, capture the flag, whole team in.',
+  },
+  {
+    src: '/gallery/mlsa-crew.jpg',
+    span: 'col-span-2 row-span-1',
+    caption: 'everyone who showed up, one frame.',
+  },
   { src: '/gallery/window.jpg', span: 'col-span-1 row-span-1', caption: 'found a window worth sitting in.' },
-  { src: '/gallery/talk-wide.jpg', span: 'col-span-2 row-span-1', caption: 'presenting web ar to a full room.' },
   { src: '/gallery/sparkler.jpg', span: 'col-span-1 row-span-1', caption: 'long exposure, short attention span.' },
-  { src: '/gallery/books.jpg', span: 'col-span-4 row-span-1', caption: 'the stack that did not fit in the bag.' },
+  {
+    src: '/gallery/talk-wide.jpg',
+    span: 'col-span-2 row-span-1',
+    caption: 'presenting web ar to a full room.',
+  },
+  {
+    src: '/gallery/books.jpg',
+    span: 'col-span-2 row-span-1',
+    caption: 'the stack that did not fit in the bag.',
+  },
 ];
