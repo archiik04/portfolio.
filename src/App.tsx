@@ -1,94 +1,70 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useLenis } from './hooks/useLenis';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { Projects } from './components/Projects';
-import { Experience } from './components/Experience';
-import { Education } from './components/Education';
-import { SkillsSection } from './components/SkillsSection';
-import { Footer } from './components/Footer';
-import { Sidequests } from './components/Sidequests';
+import { TopBar } from './components/site/TopBar';
+import { Intro } from './components/site/Intro';
+import { Work } from './components/site/Work';
+import { Built } from './components/site/Built';
+import { OpenSource } from './components/site/OpenSource';
+import { Stack } from './components/site/Stack';
+import { School } from './components/site/School';
+import { Proof } from './components/site/Proof';
+import { SayHi } from './components/site/SayHi';
+import { SiteFooter } from './components/site/SiteFooter';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { ResumeViewer } from './pages/ResumeViewer';
-import { About } from './pages/About';
+
+function Home() {
+  return (
+    <>
+      <TopBar />
+      <main className="mx-auto w-full max-w-column px-6">
+        <Intro />
+        <Work />
+        <Built />
+        <OpenSource />
+        <Stack />
+        <School />
+        <Proof />
+        <SayHi />
+        <SiteFooter />
+      </main>
+    </>
+  );
+}
 
 function App() {
-  // Initialize Lenis smooth inertial scrolling
   useLenis();
   const location = useLocation();
 
-  // Track route changes to reset scroll position immediately
+  // Reset scroll on route change
   useEffect(() => {
-    if ((window as any).lenis) {
-      (window as any).lenis.scrollTo(0, { immediate: true });
-    } else {
-      window.scrollTo(0, 0);
-    }
+    const lenis = (window as any).lenis;
+    if (lenis) lenis.scrollTo(0, { immediate: true });
+    else window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  // Handle smooth scrolls to anchors
+  // Smooth-scroll to anchors
   useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        // Wait briefly for Lenis to be ready
-        setTimeout(() => {
-          if ((window as any).lenis) {
-            (window as any).lenis.scrollTo(element, { offset: -48 });
-          } else {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 100);
-      }
-    }
+    if (!location.hash) return;
+    const el = document.getElementById(location.hash.slice(1));
+    if (!el) return;
+    const t = setTimeout(() => {
+      const lenis = (window as any).lenis;
+      if (lenis) lenis.scrollTo(el, { offset: -56 });
+      else el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+    return () => clearTimeout(t);
   }, [location.hash]);
 
   return (
-    <Routes>
-      {/* 1. Landing View Route */}
-      <Route
-        path="/"
-        element={
-          <div className="min-h-screen bg-bg-paper text-text-primary transition-colors duration-300 font-sans select-none flex flex-col relative overflow-x-hidden">
-            {/* Navigation Header */}
-            <Navbar />
-
-            {/* Main Content Sections */}
-            <main className="flex-grow pt-10">
-              {/* Landing header view */}
-              <Hero />
-              
-              {/* Content sections stack with uniform spacing */}
-              <div>
-                <Projects />
-
-                <Experience />
-
-                <Education />
-
-                <SkillsSection />
-
-                <Sidequests />
-              </div>
-            </main>
-
-            {/* Footer credits */}
-            <Footer />
-          </div>
-        }
-      />
-
-      {/* 2. Case Study Route: Focused Detail View */}
-      <Route path="/project/:projectId" element={<ProjectDetail />} />
-
-      {/* 3. Resume Viewer Route */}
-      <Route path="/resume" element={<ResumeViewer />} />
-
-      {/* 4. About Route */}
-      <Route path="/about" element={<About />} />
-    </Routes>
+    <div className="min-h-screen bg-paper text-ink antialiased">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/project/:projectId" element={<ProjectDetail />} />
+        <Route path="/resume" element={<ResumeViewer />} />
+      </Routes>
+    </div>
   );
 }
 

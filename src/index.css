@@ -2,86 +2,49 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ---------------------------------------------------------------------------
+   Tokens. Four greys and a hairline, nothing else — the layout does the work.
+   --------------------------------------------------------------------------- */
 :root {
-  --color-bg-paper: #F8F6F2;
-  --color-text-primary: #241A17;
-  --color-text-secondary: #8A8178;
-  --color-accent-brown: #57575D;
-  --color-border-warm: #EAE3D9;
-  --color-white-warm: #FFFFFF;
+  --color-paper: #FFFFFF;
+  --color-ink: #0F0F0F;     /* headings, emphasis */
+  --color-muted: #52525B;   /* body copy */
+  --color-faint: #9A9A9E;   /* captions, dates, meta */
+  --color-line: rgba(15, 15, 15, 0.12);
+  --color-raise: #FAFAFA;   /* the one lifted surface */
 }
 
 .dark {
-  --color-bg-paper: #0A0A0A; /* Near-black, fully neutral */
-  --color-text-primary: #F5F5F5; /* Neutral near-white text */
-  --color-text-secondary: #A1A1A1; /* Neutral grey for descriptions */
-  --color-accent-brown: #E5E5E5; /* Light grey highlight for active/hover states */
-  --color-border-warm: #262626; /* Neutral border against the lifted surface */
-  --color-white-warm: #141414; /* Card surface — sits just above the page background */
+  --color-paper: #0A0A0A;
+  --color-ink: #F4F4F5;
+  --color-muted: #A1A1AA;
+  --color-faint: #6B6B72;
+  --color-line: rgba(255, 255, 255, 0.14);
+  --color-raise: #141414;
 }
 
 @theme {
-  --color-bg-paper: var(--color-bg-paper);
-  --color-text-primary: var(--color-text-primary);
-  --color-text-secondary: var(--color-text-secondary);
-  --color-accent-brown: var(--color-accent-brown);
-  --color-border-warm: var(--color-border-warm);
-  --color-white-warm: var(--color-white-warm);
+  --color-paper: var(--color-paper);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-faint: var(--color-faint);
+  --color-line: var(--color-line);
+  --color-raise: var(--color-raise);
 
-  --font-sans: "Inter", sans-serif;
-  --font-serif-editorial: "Space Grotesk", "Inter", sans-serif;
-  --font-mono-tag: "Roboto Mono", monospace;
+  --font-sans: "Inter Tight", Inter, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  --animate-marquee: marquee 20s linear infinite;
-  --animate-marquee-slow: marquee 45s linear infinite;
-
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
+  /* The whole site is one narrow column */
+  --spacing-column: 720px;
 }
 
-/* Base Styles — grid-paper texture lives on <html>; light values here, dark overridden below.
-   Sections paint .bg-bg-paper on top, so that class goes transparent to let the grid show. */
 html {
-  color: var(--color-text-primary);
-  font-family: "Inter", sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
-
-  background-color: #EFEEE9;
-}
-
-/* Light theme: even fine dot grid. */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle at center, rgba(30, 30, 32, 0.16) 0.9px, transparent 1.1px),
-    radial-gradient(circle at center, rgba(30, 30, 32, 0.09) 0.7px, transparent 0.9px);
-  background-size: 6px 6px, 6px 6px;
-  background-position: 0 0, 3px 3px;
-}
-
-html.dark body::after {
-  display: none;
-}
-
-/* Dark: same halftone, inverted and much fainter. Must restate size/position —
-   otherwise the base rule's values apply to these layers and produce a moiré. */
-html.dark {
-  background-color: #0A0A0A;
-  background-image:
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.075) 0.9px, transparent 1.1px),
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.04) 0.7px, transparent 0.9px);
-  background-size: 6px 6px, 6px 6px;
-  background-position: 0 0, 3px 3px;
-}
-
-.bg-bg-paper {
-  background-color: transparent;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
@@ -89,21 +52,36 @@ body {
   padding: 0;
   min-height: 100vh;
   overflow-x: hidden;
+  background-color: var(--color-paper);
+  font-size: 14px;
+  line-height: 1.65;
 }
 
-/* Custom selection styling */
 ::selection {
-  background-color: var(--color-accent-brown);
-  color: var(--color-bg-paper);
+  background-color: var(--color-ink);
+  color: var(--color-paper);
 }
 
-/* Focus outline accessibility */
 *:focus-visible {
-  outline: 2px solid var(--color-accent-brown);
-  outline-offset: 4px;
+  outline: 1.5px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
-/* Lenis smooth scrolling rules */
+/* Underline that draws itself in on hover — used on every inline link */
+.link-draw {
+  background-image: linear-gradient(to right, currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.link-draw:hover {
+  background-size: 100% 1px;
+}
+
+/* Lenis smooth scrolling */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -125,7 +103,6 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* Print formatting rules */
 @media print {
   body {
     background: white !important;
@@ -134,56 +111,4 @@ html.lenis body {
   .no-print {
     display: none !important;
   }
-}
-
-/* Dark Theme Custom Personalization Overrides */
-.dark a.group > div {
-  background-color: #141414 !important;
-  border-color: #262626 !important;
-}
-.dark a.group:hover > div {
-  border-color: #E5E5E5 !important;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
-}
-
-/* Experience & Education cards */
-.dark .border-border-warm.dark\:bg-white-warm\/5,
-.dark .border-border-warm.dark\:bg-white-warm\/8,
-.dark .border-border-warm.dark\:bg-white-warm\/40 {
-  background-color: #141414 !important;
-  border-color: #262626 !important;
-}
-.dark .border-border-warm.dark\:bg-white-warm\/5:hover,
-.dark .border-border-warm.dark\:bg-white-warm\/8:hover {
-  border-color: #333333 !important;
-}
-
-/* Accordion expand indicator bg */
-.dark .bg-bg-paper.dark\:bg-white-warm\/5 {
-  background-color: #1C1C1C !important;
-}
-
-/* Bento grid cards in Quest Log */
-.dark .border-white\/30.dark\:border-white-warm\/10 {
-  background-color: rgba(20, 20, 20, 0.95) !important;
-  border-color: #262626 !important;
-}
-.dark .border-white\/30.dark\:border-white-warm\/10:hover {
-  border-color: #E5E5E5 !important;
-}
-
-/* Social links and small badges */
-.dark .border-border-warm.dark\:bg-white-warm\/8 {
-  background-color: #141414 !important;
-  border-color: #262626 !important;
-}
-.dark .border-border-warm.dark\:bg-white-warm\/8:hover {
-  background-color: #1C1C1C !important;
-  border-color: #333333 !important;
-}
-
-/* Github Contributions box */
-.dark .border-border-warm.dark\:bg-white-warm\/5 {
-  background-color: #141414 !important;
-  border-color: #262626 !important;
 }
