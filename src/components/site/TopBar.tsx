@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sun, Moon } from 'lucide-react';
 
 const NAV = [
   { label: 'work', href: '#work' },
@@ -87,9 +89,25 @@ export const TopBar: React.FC = () => {
             <button
               onClick={() => setTheme(t => (t === 'light' ? 'dark' : 'light'))}
               aria-label={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-              className="shrink-0 cursor-pointer font-mono text-[11px] text-muted transition-colors duration-300 hover:text-ink"
+              title={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              className="relative ml-1 flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted transition-colors duration-300 hover:text-ink"
             >
-              {theme === 'light' ? 'dark' : 'light'}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={theme}
+                  initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                  exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  className="absolute flex items-center justify-center"
+                >
+                  {theme === 'light' ? (
+                    <Moon className="h-[14px] w-[14px]" />
+                  ) : (
+                    <Sun className="h-[14px] w-[14px]" />
+                  )}
+                </motion.span>
+              </AnimatePresence>
             </button>
           </nav>
         </div>
