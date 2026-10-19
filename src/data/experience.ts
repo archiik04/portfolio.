@@ -13,7 +13,11 @@ export interface ExperienceItem {
    * row falls back to a monogram tile.
    */
   logo?: string;
+  /** Set for monochrome line-art marks so they stay visible on the dark theme. */
+  logoInvertOnDark?: boolean;
 }
+
+import learningPathwaysLogo from '../assets/logos/learning-pathways.png';
 
 export const experiences: ExperienceItem[] = [
   {
@@ -27,7 +31,9 @@ export const experiences: ExperienceItem[] = [
     ],
     technologies: [
       'React', 'FastAPI', 'TypeScript', 'Component Design', 'Product Research'
-    ]
+    ],
+    logo: learningPathwaysLogo,
+    logoInvertOnDark: true
   },
   {
     id: 'aashdit',

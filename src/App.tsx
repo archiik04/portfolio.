@@ -5,6 +5,7 @@ import { TopBar } from './components/site/TopBar';
 import { Intro } from './components/site/Intro';
 import { Work } from './components/site/Work';
 import { Built } from './components/site/Built';
+import { SideQuests } from './components/site/SideQuests';
 import { Gallery } from './components/site/Gallery';
 import { OpenSource } from './components/site/OpenSource';
 import { Stack } from './components/site/Stack';
@@ -23,6 +24,7 @@ function Home() {
         <Intro />
         <Work />
         <Built />
+        <SideQuests />
         <OpenSource />
         <Stack />
         <School />

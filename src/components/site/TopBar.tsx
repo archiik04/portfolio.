@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 const NAV = [
   { label: 'work', href: '#work' },
   { label: 'built', href: '#built' },
+  { label: 'side quests', href: '#side-quests' },
   { label: 'open source', href: '#oss' },
-  { label: 'proof', href: '#proof' },
   { label: 'off the clock', href: '#gallery' },
   { label: 'say hi', href: '#say-hi' },
 ];

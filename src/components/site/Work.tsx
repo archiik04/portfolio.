@@ -14,7 +14,11 @@ export const Work: React.FC = () => (
           className="group border-t border-line/[0.5] py-6 first:border-t-0 first:pt-0"
         >
           <div className="flex gap-4 sm:gap-5">
-            <CompanyMark name={item.organization} logo={item.logo} />
+            <CompanyMark
+              name={item.organization}
+              logo={item.logo}
+              invertOnDark={item.logoInvertOnDark}
+            />
 
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
