@@ -40,6 +40,16 @@ export const galleryItems: GalleryItem[] = [
   { src: '/gallery/window.jpg', span: 'col-span-1 row-span-1', caption: 'found a window worth sitting in.' },
   { src: '/gallery/sparkler.jpg', span: 'col-span-1 row-span-1', caption: 'long exposure, short attention span.' },
   {
+    src: '/gallery/sleepy-dog.jpg',
+    span: 'col-span-1 row-span-2',
+    caption: 'sleepy dog, pencil.',
+  },
+  {
+    src: '/gallery/mindscape.jpg',
+    span: 'col-span-1 row-span-2',
+    caption: 'mindscape, scratchboard.',
+  },
+  {
     src: '/gallery/mlsa-crew.jpg',
     span: 'col-span-2 row-span-1',
     caption: 'everyone who showed up, one frame.',
