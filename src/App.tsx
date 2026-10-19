@@ -9,7 +9,7 @@ import { SideQuests } from './components/site/SideQuests';
 import { Gallery } from './components/site/Gallery';
 import { OpenSource } from './components/site/OpenSource';
 import { Stack } from './components/site/Stack';
-import { School } from './components/site/School';
+import { Education } from './components/site/Education';
 import { Proof } from './components/site/Proof';
 import { SayHi } from './components/site/SayHi';
 import { SiteFooter } from './components/site/SiteFooter';
@@ -27,7 +27,7 @@ function Home() {
         <SideQuests />
         <OpenSource />
         <Stack />
-        <School />
+        <Education />
         <Proof />
         <Gallery />
         <SayHi />

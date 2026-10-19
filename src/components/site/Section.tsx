@@ -4,8 +4,8 @@ interface SectionProps {
   id: string;
   /** Lowercase section label, e.g. "work" */
   label: string;
-  /** Mono micro-caption sitting opposite the label */
-  caption: string;
+  /** Mono micro-caption sitting opposite the label. Omit for label only. */
+  caption?: string;
   children: React.ReactNode;
 }
 
@@ -20,7 +20,9 @@ export const Section: React.FC<SectionProps> = ({ id, label, caption, children }
         <h2 className="text-[15px] font-medium tracking-[-0.02em] text-ink sm:text-lg md:text-xl">
           {label}
         </h2>
-        <p className="font-mono text-[10px] text-faint sm:text-[11px]">{caption}</p>
+        {caption && (
+          <p className="font-mono text-[10px] text-faint sm:text-[11px]">{caption}</p>
+        )}
       </div>
     </div>
     {children}
