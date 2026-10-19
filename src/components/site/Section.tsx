@@ -6,6 +6,8 @@ interface SectionProps {
   label: string;
   /** Mono micro-caption sitting opposite the label. Omit for label only. */
   caption?: string;
+  /** Rendered opposite the label instead of a caption, e.g. a filter control. */
+  aside?: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -13,16 +15,17 @@ interface SectionProps {
  * Every section is the same: a hairline, the label on the left, a small mono
  * caption on the right, then the content. No cards, no boxes.
  */
-export const Section: React.FC<SectionProps> = ({ id, label, caption, children }) => (
+export const Section: React.FC<SectionProps> = ({ id, label, caption, aside, children }) => (
   <section id={id} className="scroll-mt-20 py-12 md:py-16">
     <div className="mb-9 md:mb-12">
       <div className="flex flex-col gap-1 border-t border-line pt-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
         <h2 className="text-[15px] font-medium tracking-[-0.02em] text-ink sm:text-lg md:text-xl">
           {label}
         </h2>
-        {caption && (
-          <p className="font-mono text-[10px] text-faint sm:text-[11px]">{caption}</p>
-        )}
+        {aside ??
+          (caption && (
+            <p className="font-mono text-[10px] text-faint sm:text-[11px]">{caption}</p>
+          ))}
       </div>
     </div>
     {children}

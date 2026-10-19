@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Section } from './Section';
+import { GithubActivity } from './GithubActivity';
 import { useOpenSourceContributions } from '../../hooks/useOpenSourceContributions';
 import { GITHUB_USERNAME, type ContributionStatus } from '../../data/openSource';
 
@@ -35,13 +36,10 @@ export const OpenSource: React.FC = () => {
   );
 
   return (
-    <Section id="oss" label="open source">
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-[13px] leading-[1.7] text-muted">
-          {contributions.length} pull requests to repositories i don&rsquo;t own,{' '}
-          {counts.Merged} merged. pulled live from github.
-        </p>
-
+    <Section
+      id="oss"
+      label="open source"
+      aside={
         <div className="inline-flex shrink-0 rounded-[8px] border border-line p-0.5">
           {FILTERS.map(status => {
             const active = filter === status;
@@ -70,8 +68,8 @@ export const OpenSource: React.FC = () => {
             );
           })}
         </div>
-      </div>
-
+      }
+    >
       {visible.length === 0 ? (
         <p className="py-6 text-[13px] text-faint">nothing {filter.toLowerCase()} right now.</p>
       ) : (
@@ -103,6 +101,10 @@ export const OpenSource: React.FC = () => {
           ))}
         </motion.div>
       )}
+
+      <div className="mt-10 border-t border-line pt-7">
+        <GithubActivity />
+      </div>
 
       <a
         href={`https://github.com/${GITHUB_USERNAME}`}
