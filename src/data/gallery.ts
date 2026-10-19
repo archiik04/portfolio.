@@ -23,12 +23,17 @@ export const galleryItems: GalleryItem[] = [
     caption: 'defcon 3301, capture the flag, whole team in.',
   },
   {
+    src: '/gallery/beach-cleanup.jpg',
+    span: 'col-span-2 row-span-1',
+    caption: 'lake cleanup, gloves on, bags full.',
+  },
+  { src: '/gallery/window.jpg', span: 'col-span-1 row-span-1', caption: 'found a window worth sitting in.' },
+  { src: '/gallery/sparkler.jpg', span: 'col-span-1 row-span-1', caption: 'long exposure, short attention span.' },
+  {
     src: '/gallery/mlsa-crew.jpg',
     span: 'col-span-2 row-span-1',
     caption: 'everyone who showed up, one frame.',
   },
-  { src: '/gallery/window.jpg', span: 'col-span-1 row-span-1', caption: 'found a window worth sitting in.' },
-  { src: '/gallery/sparkler.jpg', span: 'col-span-1 row-span-1', caption: 'long exposure, short attention span.' },
   {
     src: '/gallery/talk-wide.jpg',
     span: 'col-span-2 row-span-1',
@@ -36,7 +41,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     src: '/gallery/books.jpg',
-    span: 'col-span-2 row-span-1',
+    span: 'col-span-4 row-span-1',
     caption: 'the stack that did not fit in the bag.',
   },
 ];
