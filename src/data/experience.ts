@@ -18,6 +18,8 @@ export interface ExperienceItem {
 }
 
 import learningPathwaysLogo from '../assets/logos/learning-pathways.png';
+import aashditLogo from '../assets/logos/aashdit.png';
+import canvas8Logo from '../assets/logos/canvas8.png';
 
 export const experiences: ExperienceItem[] = [
   {
@@ -46,7 +48,8 @@ export const experiences: ExperienceItem[] = [
     ],
     technologies: [
       'RAG', 'Vector DB', 'Python', 'Document Parsing', 'Semantic Search'
-    ]
+    ],
+    logo: aashditLogo
   },
   {
     id: 'canvas8',
@@ -59,6 +62,7 @@ export const experiences: ExperienceItem[] = [
     ],
     technologies: [
       'Product Strategy', 'UX Research', 'Google Gemini', 'Developer Beta', 'AI Ethics', 'Public Speaking'
-    ]
+    ],
+    logo: canvas8Logo
   }
 ];
