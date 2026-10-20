@@ -13,6 +13,9 @@ const LEVEL_DARK = ['#161616', '#0E4429', '#006D32', '#26A641', '#39D353'];
 
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
+/** Legend swatches, keyed by level rather than colour. */
+const LEVELS = [0, 1, 2, 3, 4];
+
 const label = (count: number, date: string) => {
   const d = new Date(date).toLocaleDateString('en-GB', {
     day: 'numeric',
@@ -85,7 +88,7 @@ export const GithubActivity: React.FC = () => {
         </p>
         <div className="flex items-center gap-1.5 font-mono text-[9px] text-faint">
           <span>less</span>
-          {LEVEL_LIGHT.map((c, i) => (
+          {LEVELS.map(i => (
             <span
               key={i}
               className="h-[9px] w-[9px] rounded-[2px]"
