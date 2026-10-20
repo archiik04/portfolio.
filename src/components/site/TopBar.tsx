@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
+import { Logo } from './Logo';
 
 const NAV = [
   { label: 'work', href: '#work' },
@@ -68,9 +69,9 @@ export const TopBar: React.FC = () => {
             href="#top"
             onClick={jumpTo('#top')}
             aria-label="back to top"
-            className="shrink-0 font-mono text-[11px] text-ink transition-opacity duration-300 hover:opacity-60"
+            className="shrink-0 text-ink transition-opacity duration-300 hover:opacity-60"
           >
-            ak
+            <Logo className="h-[13px] w-auto" />
           </a>
 
           <nav className="flex min-w-0 flex-1 items-center justify-end gap-4 overflow-x-auto [scrollbar-width:none] sm:gap-5 [&::-webkit-scrollbar]:hidden">
