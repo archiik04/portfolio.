@@ -82,8 +82,7 @@ export const Intro: React.FC = () => (
         <li className="flex gap-2.5">
           <span className="text-faint">&middot;</span>
           <span>
-            gemini in beta, gen z opinions straight to{' '}
-            <span className="text-ink">google</span>, two years of it.
+            gen z opinions straight to <span className="text-ink">google</span> as a youth advisor.
           </span>
         </li>
       </ul>
