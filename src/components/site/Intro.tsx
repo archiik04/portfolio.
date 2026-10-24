@@ -35,10 +35,45 @@ const ACTIONS = [
     href: 'https://calendly.com/archi_k/youth-mentorship',
     icon: <Calendar className="h-[15px] w-[15px]" />,
   },
+  { label: 'Resume', to: '/resume', icon: <FileText className="h-[15px] w-[15px]" /> },
 ];
 
 const BUTTON =
-  'flex h-10 w-10 items-center justify-center rounded-[10px] border border-line text-muted transition-all duration-300 hover:border-faint/60 hover:text-ink';
+  'group/social relative flex h-10 w-10 items-center justify-center rounded-[10px] border border-line bg-paper text-muted hover:border-faint/60 hover:text-ink';
+
+/** Buttons fade up in sequence once the intro has settled */
+const ROW = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.05, delayChildren: 0.35 } },
+};
+
+const ITEM = {
+  hidden: { opacity: 0, y: 8 },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring' as const, stiffness: 400, damping: 24 } },
+};
+
+const SPRING = { type: 'spring' as const, stiffness: 420, damping: 17 };
+
+/** Icon-only buttons need a name on hover, and the nudge makes them feel alive */
+const ButtonBody: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
+  <>
+    <motion.span
+      className="flex items-center justify-center"
+      whileHover={{ rotate: -8, scale: 1.18 }}
+      transition={SPRING}
+    >
+      {children}
+    </motion.span>
+    <span
+      className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 translate-y-1 scale-95 whitespace-nowrap
+        rounded-md bg-ink px-2 py-1 font-mono text-[9px] tracking-wide text-paper opacity-0
+        transition-all duration-200 ease-out
+        group-hover/social:translate-y-0 group-hover/social:scale-100 group-hover/social:opacity-100"
+    >
+      {label.toLowerCase()}
+    </span>
+  </>
+);
 
 export const Intro: React.FC = () => (
   <section id="top" className="pt-14 pb-12 md:pt-20 md:pb-16">
@@ -88,36 +123,36 @@ export const Intro: React.FC = () => (
       </ul>
 
       <div className="mt-9 border-t border-line pt-6">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-2.5">
-            {ACTIONS.map(action => (
-              <a
-                key={action.label}
-                href={action.href}
-                target={action.href.startsWith('mailto:') ? undefined : '_blank'}
-                rel="noopener noreferrer"
-                aria-label={action.label}
-                title={action.label}
-                className={BUTTON}
-              >
-                {action.icon}
-              </a>
-            ))}
-            <Link to="/resume" aria-label="Resume" title="Resume" className={BUTTON}>
-              <FileText className="h-[15px] w-[15px]" />
-            </Link>
-          </div>
+        <p className="font-mono text-[10.5px] text-faint">here are my socials</p>
 
-          <p className="flex items-center gap-2.5">
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-            </span>
-            <span className="font-mono text-[11px] leading-snug text-muted">
-              open to internships and new-grad roles across product &amp; engineering.
-            </span>
-          </p>
-        </div>
+        <motion.div
+          variants={ROW}
+          initial="hidden"
+          animate="visible"
+          className="mt-3 flex flex-wrap items-center gap-2.5"
+        >
+          {ACTIONS.map(action => (
+            <motion.div key={action.label} variants={ITEM}>
+              <motion.div whileHover={{ y: -4 }} whileTap={{ scale: 0.92 }} transition={SPRING}>
+                {action.to ? (
+                  <Link to={action.to} aria-label={action.label} className={BUTTON}>
+                    <ButtonBody label={action.label}>{action.icon}</ButtonBody>
+                  </Link>
+                ) : (
+                  <a
+                    href={action.href}
+                    target={action.href?.startsWith('mailto:') ? undefined : '_blank'}
+                    rel="noopener noreferrer"
+                    aria-label={action.label}
+                    className={BUTTON}
+                  >
+                    <ButtonBody label={action.label}>{action.icon}</ButtonBody>
+                  </a>
+                )}
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </motion.div>
   </section>
