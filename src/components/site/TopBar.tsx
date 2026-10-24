@@ -71,7 +71,7 @@ export const TopBar: React.FC = () => {
             aria-label="back to top"
             className="shrink-0 text-ink transition-opacity duration-300 hover:opacity-60"
           >
-            <Logo className="h-[13px] w-auto" />
+            <Logo className="h-[9px] w-auto sm:h-[10px]" />
           </a>
 
           {/* Scrolls sideways when the links outrun the screen, and fades at the
