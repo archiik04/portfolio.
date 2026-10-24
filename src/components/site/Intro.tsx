@@ -82,15 +82,7 @@ export const Intro: React.FC = () => (
         <li className="flex gap-2.5">
           <span className="text-faint">&middot;</span>
           <span>
-            spent two years telling <span className="text-ink">google</span> what people my age
-            want from ai.
-          </span>
-        </li>
-        <li className="flex gap-2.5">
-          <span className="text-faint">&middot;</span>
-          <span>
-            currently building <span className="text-ink">docsy</span> and{' '}
-            <span className="text-ink">emailbrain</span>, mostly at night.
+            two years of cool convos as a <span className="text-ink">google</span> youth advisor.
           </span>
         </li>
       </ul>
