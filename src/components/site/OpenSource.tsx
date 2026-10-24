@@ -1,11 +1,15 @@
 import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import { Section } from './Section';
 import { GithubActivity } from './GithubActivity';
 import { useOpenSourceContributions } from '../../hooks/useOpenSourceContributions';
 import { GITHUB_USERNAME, type ContributionStatus } from '../../data/openSource';
 
 const FILTERS: ContributionStatus[] = ['Merged', 'Open', 'Closed'];
+
+/** Rows shown before the list is expanded */
+const PREVIEW_COUNT = 3;
 
 /** Status colours the toggle, the only colour in the section. */
 const STATUS_TONE: Record<ContributionStatus, string> = {
@@ -23,6 +27,13 @@ const prNumber = (link: string) => {
 export const OpenSource: React.FC = () => {
   const { contributions } = useOpenSourceContributions();
   const [filter, setFilter] = useState<ContributionStatus>('Merged');
+  const [expanded, setExpanded] = useState(false);
+
+  // Switching status starts the new list collapsed again
+  const selectFilter = (status: ContributionStatus) => {
+    setFilter(status);
+    setExpanded(false);
+  };
 
   const counts = useMemo(() => {
     const base: Record<ContributionStatus, number> = { Merged: 0, Open: 0, Closed: 0 };
@@ -30,10 +41,13 @@ export const OpenSource: React.FC = () => {
     return base;
   }, [contributions]);
 
-  const visible = useMemo(
+  const matching = useMemo(
     () => contributions.filter(c => c.status === filter),
     [contributions, filter]
   );
+
+  const visible = expanded ? matching : matching.slice(0, PREVIEW_COUNT);
+  const hiddenCount = matching.length - visible.length;
 
   return (
     <Section
@@ -46,7 +60,7 @@ export const OpenSource: React.FC = () => {
             return (
               <button
                 key={status}
-                onClick={() => setFilter(status)}
+                onClick={() => selectFilter(status)}
                 className={`relative cursor-pointer rounded-[6px] px-2.5 py-1 font-mono text-[10px] transition-colors duration-300 ${
                   active ? 'text-ink' : 'text-faint hover:text-muted'
                 }`}
@@ -70,7 +84,7 @@ export const OpenSource: React.FC = () => {
         </div>
       }
     >
-      {visible.length === 0 ? (
+      {matching.length === 0 ? (
         <p className="py-6 text-[13px] text-faint">nothing {filter.toLowerCase()} right now.</p>
       ) : (
         <motion.div
@@ -100,6 +114,23 @@ export const OpenSource: React.FC = () => {
             </a>
           ))}
         </motion.div>
+      )}
+
+      {matching.length > PREVIEW_COUNT && (
+        <div className="mt-7 flex justify-center">
+          <motion.button
+            onClick={() => setExpanded(v => !v)}
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+            className="inline-flex cursor-pointer items-center gap-1.5 rounded-[8px] border border-line px-4 py-2 font-mono text-[10.5px] text-muted transition-colors duration-300 hover:border-faint/50 hover:text-ink"
+          >
+            {expanded ? 'show less' : `view ${hiddenCount} more`}
+            <ArrowUpRight
+              className={`h-3 w-3 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}
+            />
+          </motion.button>
+        </div>
       )}
 
       <div className="mt-10 border-t border-line pt-7">
