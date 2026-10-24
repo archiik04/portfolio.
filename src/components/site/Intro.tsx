@@ -76,7 +76,7 @@ const ButtonBody: React.FC<{ label: string; children: React.ReactNode }> = ({ la
 );
 
 export const Intro: React.FC = () => (
-  <section id="top" className="pt-14 pb-12 md:pt-20 md:pb-16">
+  <section id="top" className="pt-24 pb-12 md:pt-32 md:pb-16">
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
