@@ -58,23 +58,26 @@ export const Intro: React.FC = () => (
       </h1>
 
       <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <p className="flex flex-wrap items-baseline gap-x-2.5">
-          <span className="font-mono text-[11px] text-faint">i am a</span>
-          <span className="text-[17px] tracking-[-0.02em] text-ink sm:text-[19px]">
-            product engineer building for ai and xr
-          </span>
+        <p className="flex flex-wrap items-baseline gap-x-2 text-[17px] tracking-[-0.02em] text-ink sm:text-[19px]">
+          <span>22</span>
+          <span className="text-faint">&middot;</span>
+          <span>engineer</span>
+          <span className="text-faint">&middot;</span>
+          <span>designer</span>
+          <span className="text-faint">&middot;</span>
+          <span>builder</span>
         </p>
         <span className="font-mono text-[11px] text-faint">bbsr/ind</span>
       </div>
 
       <p className="mt-8 text-[13.5px] leading-[1.7] text-muted sm:text-[14.5px]">
-        computer science undergrad at kiit, currently interning as a product engineer.
+        final year computer science undergrad at kiit.
       </p>
 
       <ul className="mt-4 space-y-1.5 text-[13.5px] leading-[1.7] text-muted sm:text-[14.5px]">
         <li className="flex gap-2.5">
           <span className="text-faint">&middot;</span>
-          <span>rag systems, xr builds, and pull requests to repos i don&rsquo;t own.</span>
+          <span>ai, xr and cool tech. also trying to do dsa, T..T</span>
         </li>
         <li className="flex gap-2.5">
           <span className="text-faint">&middot;</span>
