@@ -64,9 +64,7 @@ export const SiteFooter: React.FC = () => (
     </a>
 
     <p className="mt-6 text-[28px] font-medium leading-[1.1] tracking-[-0.03em] text-ink sm:text-[38px]">
-      ninety frames a second,
-      <br />
-      or it doesn&rsquo;t ship.
+      exploring cool things
     </p>
   </footer>
 );

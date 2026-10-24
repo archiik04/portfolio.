@@ -16,5 +16,4 @@ export const galleryItems: GalleryItem[] = [
   { src: '/gallery/sleepy-dog.jpg', ratio: 0.7024, caption: 'sleepy dog, pencil.' },
   { src: '/gallery/sparkler.jpg', ratio: 0.7255, caption: 'long exposure, short attention span.' },
   { src: '/gallery/mindscape.jpg', ratio: 1.0891, caption: 'mindscape, scratchboard.' },
-  { src: '/gallery/headset.jpg', ratio: 1.0417, caption: 'headset, charged and waiting.' },
 ];
