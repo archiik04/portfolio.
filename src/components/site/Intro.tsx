@@ -82,30 +82,35 @@ export const Intro: React.FC = () => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }}
     >
-      <img
-        src={avatar}
-        alt="Archi Kanungo"
-        className="h-[106px] w-[106px] rounded-[18px] border border-line object-cover shadow-[0_2px_14px_rgba(0,0,0,0.08)]"
-      />
+      {/* Portrait and name sit on one line, vertically centred on each other */}
+      <div className="flex items-center gap-4 sm:gap-5">
+        <img
+          src={avatar}
+          alt="Archi Kanungo"
+          className="h-[72px] w-[72px] shrink-0 rounded-[16px] border border-line object-cover shadow-[0_2px_14px_rgba(0,0,0,0.08)] sm:h-[92px] sm:w-[92px] sm:rounded-[18px]"
+        />
 
-      <h1 className="mt-7 text-[40px] font-medium leading-[1.05] tracking-[-0.045em] text-ink sm:text-[52px]">
-        archi kanungo
-      </h1>
+        <div className="min-w-0 flex-1">
+          <h1 className="text-[28px] font-medium leading-[1.05] tracking-[-0.045em] text-ink sm:text-[42px]">
+            archi kanungo
+          </h1>
 
-      <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-        <p className="flex flex-wrap items-baseline gap-x-2 text-[17px] tracking-[-0.02em] text-ink sm:text-[19px]">
-          <span>22</span>
-          <span className="text-faint">&middot;</span>
-          <span>engineer</span>
-          <span className="text-faint">&middot;</span>
-          <span>developer</span>
-          <span className="text-faint">&middot;</span>
-          <span>builder</span>
-        </p>
-        <span className="font-mono text-[11px] text-faint">bbsr/ind</span>
+          <div className="mt-1.5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <p className="flex flex-wrap items-baseline gap-x-2 text-[15px] tracking-[-0.02em] text-ink sm:text-[19px]">
+              <span>22</span>
+              <span className="text-faint">&middot;</span>
+              <span>engineer</span>
+              <span className="text-faint">&middot;</span>
+              <span>developer</span>
+              <span className="text-faint">&middot;</span>
+              <span>builder</span>
+            </p>
+            <span className="font-mono text-[11px] text-faint">bbsr/ind</span>
+          </div>
+        </div>
       </div>
 
-      <p className="mt-8 text-[13.5px] leading-[1.7] text-muted sm:text-[14.5px]">
+      <p className="mt-7 text-[13.5px] leading-[1.7] text-muted sm:text-[14.5px]">
         final year computer science undergrad at kiit.
       </p>
 
