@@ -14,7 +14,6 @@ export const galleryItems: GalleryItem[] = [
   { src: '/gallery/beach-cleanup.jpg', caption: 'lake cleanup, gloves on, bags full.' },
   { src: '/gallery/talk-wide.jpg', caption: 'presenting web ar to a full room.' },
   { src: '/gallery/window.jpg', caption: 'found a window worth sitting in.' },
-  { src: '/gallery/mun-denmark.jpg', caption: 'denmark, kiit model united nations.' },
   { src: '/gallery/mlsa-crew.jpg', caption: 'everyone who showed up, one frame.' },
   { src: '/gallery/sleepy-dog.jpg', caption: 'sleepy dog, pencil.' },
   { src: '/gallery/sparkler.jpg', caption: 'long exposure, short attention span.' },
