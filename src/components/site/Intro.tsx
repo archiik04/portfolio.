@@ -63,7 +63,7 @@ export const Intro: React.FC = () => (
           <span className="text-faint">&middot;</span>
           <span>engineer</span>
           <span className="text-faint">&middot;</span>
-          <span>designer</span>
+          <span>developer</span>
           <span className="text-faint">&middot;</span>
           <span>builder</span>
         </p>
