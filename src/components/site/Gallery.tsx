@@ -8,21 +8,71 @@ import { galleryItems, type GalleryItem } from '../../data/gallery';
 type Placed = GalleryItem & { index: number };
 
 /**
- * Greedy shortest-column packing. CSS columns leave the last column stranded
- * well short of the others, so the columns are built here from the known aspect
- * ratios instead. Height is tracked in units of column width (1 / ratio).
+ * Column packing from the known aspect ratios. CSS columns strand the last
+ * column well short of the others, and plain greedy placement is order
+ * dependent, so this does longest-first placement and then a short local
+ * search that moves or swaps tiles while it keeps reducing the height spread.
+ * Height is measured in units of column width (1 / ratio).
  */
 const packColumns = (items: GalleryItem[], count: number): Placed[][] => {
+  const placed: Placed[] = items.map((item, index) => ({ ...item, index }));
+  const height = (item: Placed) => 1 / item.ratio;
+  const total = (column: Placed[]) => column.reduce((sum, i) => sum + height(i), 0);
+  const spread = (cols: Placed[][]) => {
+    const totals = cols.map(total);
+    return Math.max(...totals) - Math.min(...totals);
+  };
+
+  // Longest first into whichever column is currently shortest
   const columns: Placed[][] = Array.from({ length: count }, () => []);
-  const heights = new Array(count).fill(0);
+  [...placed]
+    .sort((a, b) => height(b) - height(a))
+    .forEach(item => {
+      const totals = columns.map(total);
+      columns[totals.indexOf(Math.min(...totals))].push(item);
+    });
 
-  items.forEach((item, index) => {
-    const shortest = heights.indexOf(Math.min(...heights));
-    columns[shortest].push({ ...item, index });
-    heights[shortest] += 1 / item.ratio;
-  });
+  // Then nudge: move or swap across columns while the spread keeps shrinking
+  for (let pass = 0; pass < 60; pass += 1) {
+    const totals = columns.map(total);
+    const tall = totals.indexOf(Math.max(...totals));
+    const short = totals.indexOf(Math.min(...totals));
+    if (tall === short) break;
 
-  return columns;
+    let improved = false;
+    const best = spread(columns);
+
+    for (let i = 0; i < columns[tall].length && !improved; i += 1) {
+      // try moving one tile down to the shortest column
+      const moved = columns[tall].splice(i, 1)[0];
+      columns[short].push(moved);
+      if (spread(columns) < best) {
+        improved = true;
+      } else {
+        columns[short].pop();
+        columns[tall].splice(i, 0, moved);
+      }
+
+      // otherwise try trading it for one of the shortest column's tiles
+      for (let j = 0; j < columns[short].length && !improved; j += 1) {
+        const a = columns[tall][i];
+        const b = columns[short][j];
+        columns[tall][i] = b;
+        columns[short][j] = a;
+        if (spread(columns) < best) {
+          improved = true;
+        } else {
+          columns[tall][i] = a;
+          columns[short][j] = b;
+        }
+      }
+    }
+
+    if (!improved) break;
+  }
+
+  // Read top to bottom in the order the data declares
+  return columns.map(column => [...column].sort((a, b) => a.index - b.index));
 };
 
 /** 2 columns on a phone, 3 from the sm breakpoint up */
