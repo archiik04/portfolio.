@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Mail, FileText, Calendar } from 'lucide-react';
 import { Github, Linkedin } from '../Icons';
 import avatar from '../../assets/avatar.jpg';
+import avatarCat from '../../assets/avatar-cat.jpg';
 
 const ACTIONS = [
   {
@@ -75,6 +76,36 @@ const ButtonBody: React.FC<{ label: string; children: React.ReactNode }> = ({ la
   </>
 );
 
+const FACE =
+  'absolute inset-0 h-full w-full rounded-[16px] border border-line object-cover shadow-[0_2px_14px_rgba(0,0,0,0.08)] [backface-visibility:hidden] sm:rounded-[18px]';
+
+/** Flips to the cat on hover, and on tap for anything without a pointer. */
+const Avatar: React.FC = () => {
+  const [flipped, setFlipped] = useState(false);
+
+  return (
+    <button
+      onClick={() => setFlipped(f => !f)}
+      aria-label="flip the portrait"
+      className="group/avatar h-[72px] w-[72px] shrink-0 cursor-pointer [perspective:700px] sm:h-[92px] sm:w-[92px]"
+    >
+      <div
+        className={`relative h-full w-full transition-transform duration-[650ms] ease-[cubic-bezier(0.215,0.61,0.355,1)] [transform-style:preserve-3d] group-hover/avatar:[transform:rotateY(180deg)] ${
+          flipped ? '[transform:rotateY(180deg)]' : ''
+        }`}
+      >
+        <img src={avatar} alt="Archi Kanungo" className={FACE} />
+        <img
+          src={avatarCat}
+          alt=""
+          aria-hidden="true"
+          className={`${FACE} [transform:rotateY(180deg)]`}
+        />
+      </div>
+    </button>
+  );
+};
+
 export const Intro: React.FC = () => (
   <section id="top" className="pt-24 pb-12 md:pt-32 md:pb-16">
     <motion.div
@@ -84,11 +115,7 @@ export const Intro: React.FC = () => (
     >
       {/* Portrait and name sit on one line, vertically centred on each other */}
       <div className="flex items-center gap-4 sm:gap-5">
-        <img
-          src={avatar}
-          alt="Archi Kanungo"
-          className="h-[72px] w-[72px] shrink-0 rounded-[16px] border border-line object-cover shadow-[0_2px_14px_rgba(0,0,0,0.08)] sm:h-[92px] sm:w-[92px] sm:rounded-[18px]"
-        />
+        <Avatar />
 
         <div className="min-w-0 flex-1">
           <h1 className="text-[28px] font-medium leading-[1.05] tracking-[-0.045em] text-ink sm:text-[42px]">
