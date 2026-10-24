@@ -55,7 +55,7 @@ export const TopBar: React.FC = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 hidden no-print transition-transform duration-500 ease-out md:block ${
+      className={`fixed inset-x-0 top-0 z-50 no-print transition-transform duration-500 ease-out ${
         hidden ? '-translate-y-full' : 'translate-y-0'
       }`}
     >
@@ -64,7 +64,7 @@ export const TopBar: React.FC = () => {
           solid ? 'border-line bg-paper/85 backdrop-blur-md' : 'border-transparent bg-transparent'
         }`}
       >
-        <div className="mx-auto flex h-14 max-w-column items-center gap-4 px-5 sm:px-6">
+        <div className="mx-auto flex h-14 max-w-column items-center gap-3 px-5 sm:gap-4 sm:px-6">
           <a
             href="#top"
             onClick={jumpTo('#top')}
@@ -74,7 +74,13 @@ export const TopBar: React.FC = () => {
             <Logo className="h-[13px] w-auto" />
           </a>
 
-          <nav className="flex min-w-0 flex-1 items-center justify-end gap-4 overflow-x-auto [scrollbar-width:none] sm:gap-5 [&::-webkit-scrollbar]:hidden">
+          {/* Scrolls sideways when the links outrun the screen, and fades at the
+              right edge so it is obvious there is more than fits. */}
+          <nav
+            className="flex min-w-0 flex-1 items-center justify-start gap-4 overflow-x-auto [scrollbar-width:none] sm:justify-end sm:gap-5 [&::-webkit-scrollbar]:hidden
+              [mask-image:linear-gradient(to_right,#000_calc(100%-20px),transparent_100%)] sm:[mask-image:none]
+              [-webkit-mask-image:linear-gradient(to_right,#000_calc(100%-20px),transparent_100%)] sm:[-webkit-mask-image:none]"
+          >
             {NAV.map(item => (
               <a
                 key={item.href}
@@ -86,31 +92,32 @@ export const TopBar: React.FC = () => {
                 <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full" />
               </a>
             ))}
-
-            <button
-              onClick={() => setTheme(t => (t === 'light' ? 'dark' : 'light'))}
-              aria-label={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-              title={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-              className="relative ml-1 flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted transition-colors duration-300 hover:text-ink"
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={theme}
-                  initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
-                  animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                  exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
-                  className="absolute flex items-center justify-center"
-                >
-                  {theme === 'light' ? (
-                    <Moon className="h-[14px] w-[14px]" />
-                  ) : (
-                    <Sun className="h-[14px] w-[14px]" />
-                  )}
-                </motion.span>
-              </AnimatePresence>
-            </button>
           </nav>
+
+          {/* Pinned outside the scroller so it is always reachable */}
+          <button
+            onClick={() => setTheme(t => (t === 'light' ? 'dark' : 'light'))}
+            aria-label={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            title={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            className="relative flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted transition-colors duration-300 hover:text-ink"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={theme}
+                initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+                animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="absolute flex items-center justify-center"
+              >
+                {theme === 'light' ? (
+                  <Moon className="h-[14px] w-[14px]" />
+                ) : (
+                  <Sun className="h-[14px] w-[14px]" />
+                )}
+              </motion.span>
+            </AnimatePresence>
+          </button>
         </div>
       </div>
     </header>
