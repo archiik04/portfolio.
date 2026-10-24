@@ -94,11 +94,10 @@ const Avatar: React.FC = () => {
           flipped ? '[transform:rotateY(180deg)]' : ''
         }`}
       >
-        <img src={avatar} alt="Archi Kanungo" className={FACE} />
+        <img src={avatarCat} alt="" aria-hidden="true" className={FACE} />
         <img
-          src={avatarCat}
-          alt=""
-          aria-hidden="true"
+          src={avatar}
+          alt="Archi Kanungo"
           className={`${FACE} [transform:rotateY(180deg)]`}
         />
       </div>
