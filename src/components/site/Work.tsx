@@ -1,82 +1,103 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus } from 'lucide-react';
 import { Section } from './Section';
 import { CompanyMark } from './CompanyMark';
 import { experiences } from '../../data/experience';
 
 const lower = (s: string) => s.toLowerCase();
 
-/** Rows arrive one after another as the section comes into view */
-const LIST = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
+export const Work: React.FC = () => {
+  // First row starts open so it is obvious the rest expand too
+  const [open, setOpen] = useState<Record<string, boolean>>({
+    [experiences[0]?.id ?? '']: true,
+  });
 
-const ROW = {
-  hidden: { opacity: 0, y: 10 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, ease: [0.215, 0.61, 0.355, 1] as const },
-  },
-};
+  const toggle = (id: string) => setOpen(prev => ({ ...prev, [id]: !prev[id] }));
 
-export const Work: React.FC = () => (
-  <Section id="work" label="work" caption="places i've built things.">
-    <motion.ol
-      variants={LIST}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-80px' }}
-    >
-      {experiences.map(item => (
-        <motion.li
-          key={item.id}
-          variants={ROW}
-          className="group relative border-t border-line/[0.5] py-6 first:border-t-0 first:pt-0"
-        >
-          {/* A rule grows down the left edge while the row is hovered */}
-          <span className="pointer-events-none absolute -left-4 top-6 h-0 w-px bg-ink/25 transition-all duration-500 ease-out group-first:top-0 group-hover:h-[calc(100%-3rem)] group-hover:group-first:h-[calc(100%-1.5rem)]" />
+  return (
+    <Section id="work" label="work" caption="places i've built things.">
+      <ol>
+        {experiences.map(item => {
+          const isOpen = !!open[item.id];
 
-          <div className="flex gap-4 sm:gap-5">
-            <div className="transition-transform duration-300 ease-out group-hover:-translate-y-0.5 group-hover:scale-[1.06]">
-              <CompanyMark
-                name={item.organization}
-                logo={item.logo}
-                invertOnDark={item.logoInvertOnDark}
-              />
-            </div>
+          return (
+            <li
+              key={item.id}
+              className="group border-t border-line/[0.5] py-6 first:border-t-0 first:pt-0"
+            >
+              <div className="flex gap-4 sm:gap-5">
+                <CompanyMark
+                  name={item.organization}
+                  logo={item.logo}
+                  invertOnDark={item.logoInvertOnDark}
+                />
 
-            <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
-                <h3 className="text-[13.5px] font-medium tracking-[-0.01em] text-ink transition-transform duration-300 ease-out group-hover:translate-x-0.5 sm:text-[15px]">
-                  {lower(item.organization)}
-                </h3>
-                <span className="shrink-0 font-mono text-[10px] text-faint transition-colors duration-300 group-hover:text-muted">
-                  {lower(item.duration)}
-                </span>
+                <div className="min-w-0 flex-1">
+                  {/* The whole header toggles, so the hit area is the full row */}
+                  <button
+                    onClick={() => toggle(item.id)}
+                    aria-expanded={isOpen}
+                    aria-controls={`work-${item.id}`}
+                    className="flex w-full cursor-pointer flex-col text-left"
+                  >
+                    <span className="flex w-full flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                      <span className="text-[13.5px] font-medium tracking-[-0.01em] text-ink sm:text-[15px]">
+                        {lower(item.organization)}
+                      </span>
+
+                      <span className="flex shrink-0 items-center gap-2.5">
+                        <span className="font-mono text-[10px] text-faint">
+                          {lower(item.duration)}
+                        </span>
+                        <Plus
+                          className={`h-3.5 w-3.5 text-faint transition-all duration-300 ease-out group-hover:text-muted ${
+                            isOpen ? 'rotate-45' : 'rotate-0'
+                          }`}
+                        />
+                      </span>
+                    </span>
+
+                    <span className="text-[12px] text-muted sm:text-[13px]">
+                      {lower(item.role)} <span className="text-faint">|</span>{' '}
+                      {lower(item.location)}
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={`work-${item.id}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{
+                          height: { duration: 0.32, ease: [0.215, 0.61, 0.355, 1] },
+                          opacity: { duration: 0.22 },
+                        }}
+                        className="overflow-hidden"
+                      >
+                        {item.responsibilities.map((line, i) => (
+                          <p
+                            key={i}
+                            className="mt-2.5 text-[12.5px] leading-[1.65] text-muted/85 sm:text-[13.5px] sm:leading-[1.7]"
+                          >
+                            {lower(line)}
+                          </p>
+                        ))}
+
+                        <p className="mt-2.5 font-mono text-[10px] leading-relaxed text-faint">
+                          {item.technologies.map(lower).join(' · ')}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
-
-              <p className="text-[12px] text-muted sm:text-[13px]">
-                {lower(item.role)} <span className="text-faint">|</span> {lower(item.location)}
-              </p>
-
-              {item.responsibilities.map((line, i) => (
-                <p
-                  key={i}
-                  className="mt-2.5 text-[12.5px] leading-[1.65] text-muted/85 transition-colors duration-300 group-hover:text-muted sm:text-[13.5px] sm:leading-[1.7]"
-                >
-                  {lower(line)}
-                </p>
-              ))}
-
-              <p className="mt-2.5 font-mono text-[10px] leading-relaxed text-faint transition-colors duration-300 group-hover:text-muted">
-                {item.technologies.map(lower).join(' · ')}
-              </p>
-            </div>
-          </div>
-        </motion.li>
-      ))}
-    </motion.ol>
-  </Section>
-);
+            </li>
+          );
+        })}
+      </ol>
+    </Section>
+  );
+};
