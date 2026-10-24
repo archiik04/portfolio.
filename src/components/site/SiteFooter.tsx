@@ -57,8 +57,8 @@ export const SiteFooter: React.FC = () => (
       className="mt-7 inline-flex items-center gap-2 font-mono text-[11px] text-muted transition-colors duration-300 hover:text-ink"
     >
       <span className="relative flex h-2 w-2 shrink-0">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ink opacity-40" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-ink" />
       </span>
       archikanungo2004@gmail.com
     </a>

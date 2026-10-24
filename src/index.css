@@ -13,7 +13,7 @@
   --color-line: rgba(15, 15, 15, 0.12);
   --color-raise: #FAFAFA;   /* the one lifted surface */
   --color-raise-hi: #F1F1F2; /* same surface, hovered */
-  --color-accent: #1F7A4D;  /* hover only, never a fill */
+  --color-accent: #0F0F0F;  /* hover only; monochrome, matches ink */
 }
 
 .dark {
@@ -24,7 +24,7 @@
   --color-line: rgba(255, 255, 255, 0.14);
   --color-raise: #141414;
   --color-raise-hi: #1E1E20;
-  --color-accent: #45B07C;
+  --color-accent: #F4F4F5;
 }
 
 @theme {

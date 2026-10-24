@@ -7,9 +7,9 @@ interface Day {
   level: number;
 }
 
-/** GitHub's own scale, so the graph reads the way people expect it to. */
-const LEVEL_LIGHT = ['#EBEDF0', '#9BE9A8', '#40C463', '#30A14E', '#216E39'];
-const LEVEL_DARK = ['#161616', '#0E4429', '#006D32', '#26A641', '#39D353'];
+/** A grey ramp rather than GitHub's greens, to keep the page monochrome. */
+const LEVEL_LIGHT = ['#EDEDEE', '#C9C9CC', '#9A9A9E', '#5C5C63', '#1F1F22'];
+const LEVEL_DARK = ['#171718', '#2E2E31', '#55555B', '#8A8A92', '#E6E6E8'];
 
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 

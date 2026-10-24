@@ -12,10 +12,10 @@ const FILTERS: ContributionStatus[] = ['Merged', 'Open', 'Closed'];
 /** Rows shown before the list is expanded */
 const PREVIEW_COUNT = 3;
 
-/** Status colours the toggle, the only colour in the section. */
+/** Status reads by weight, not hue: the site is monochrome. */
 const STATUS_TONE: Record<ContributionStatus, string> = {
-  Merged: 'text-[#8957E5] dark:text-[#A371F7]',
-  Open: 'text-[#1A7F37] dark:text-[#3FB950]',
+  Merged: 'text-ink',
+  Open: 'text-muted',
   Closed: 'text-faint',
 };
 

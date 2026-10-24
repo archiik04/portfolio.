@@ -8,8 +8,8 @@ import { GITHUB_USERNAME, type ContributionStatus } from '../data/openSource';
 const FILTERS: (ContributionStatus | 'All')[] = ['All', 'Merged', 'Open', 'Closed'];
 
 const STATUS_TONE: Record<ContributionStatus, string> = {
-  Merged: 'text-[#8957E5] dark:text-[#A371F7]',
-  Open: 'text-[#1A7F37] dark:text-[#3FB950]',
+  Merged: 'text-ink',
+  Open: 'text-muted',
   Closed: 'text-faint',
 };
 
