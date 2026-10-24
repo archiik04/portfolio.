@@ -1,12 +1,49 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Section } from './Section';
-import { galleryItems } from '../../data/gallery';
+import { galleryItems, type GalleryItem } from '../../data/gallery';
+
+type Placed = GalleryItem & { index: number };
+
+/**
+ * Greedy shortest-column packing. CSS columns leave the last column stranded
+ * well short of the others, so the columns are built here from the known aspect
+ * ratios instead. Height is tracked in units of column width (1 / ratio).
+ */
+const packColumns = (items: GalleryItem[], count: number): Placed[][] => {
+  const columns: Placed[][] = Array.from({ length: count }, () => []);
+  const heights = new Array(count).fill(0);
+
+  items.forEach((item, index) => {
+    const shortest = heights.indexOf(Math.min(...heights));
+    columns[shortest].push({ ...item, index });
+    heights[shortest] += 1 / item.ratio;
+  });
+
+  return columns;
+};
+
+/** 2 columns on a phone, 3 from the sm breakpoint up */
+const useColumnCount = () => {
+  const [count, setCount] = useState(3);
+
+  useEffect(() => {
+    const query = window.matchMedia('(min-width: 640px)');
+    const sync = () => setCount(query.matches ? 3 : 2);
+    sync();
+    query.addEventListener('change', sync);
+    return () => query.removeEventListener('change', sync);
+  }, []);
+
+  return count;
+};
 
 export const Gallery: React.FC = () => {
   const [open, setOpen] = useState<number | null>(null);
+  const columnCount = useColumnCount();
+  const columns = useMemo(() => packColumns(galleryItems, columnCount), [columnCount]);
 
   const close = useCallback(() => setOpen(null), []);
   const step = useCallback(
@@ -17,7 +54,6 @@ export const Gallery: React.FC = () => {
     []
   );
 
-  // Arrow keys and escape, plus a scroll lock while the lightbox is up
   useEffect(() => {
     if (open === null) return;
 
@@ -41,30 +77,38 @@ export const Gallery: React.FC = () => {
 
   return (
     <Section id="gallery" label="gallery" caption="pics, mostly unplanned.">
-      {/* Masonry: every photo keeps its own shape, nothing is cropped */}
-      <div className="columns-2 gap-2 sm:columns-3">
-        {galleryItems.map((item, i) => (
-          <button
-            key={item.src}
-            onClick={() => setOpen(i)}
-            aria-label={item.caption}
-            className="group relative mb-2 block w-full cursor-zoom-in overflow-hidden rounded-[6px] bg-raise break-inside-avoid"
-          >
-            <img
-              src={item.src}
-              alt={item.caption}
-              loading="lazy"
-              className="block h-auto w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
-            />
+      <div className="flex items-start gap-2">
+        {columns.map((column, ci) => (
+          <div key={ci} className="flex flex-1 flex-col gap-2">
+            {column.map(item => (
+              <motion.button
+                key={item.src}
+                onClick={() => setOpen(item.index)}
+                aria-label={item.caption}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.45, ease: [0.215, 0.61, 0.355, 1] }}
+                style={{ aspectRatio: item.ratio }}
+                className="group relative w-full cursor-zoom-in overflow-hidden rounded-[6px] bg-raise"
+              >
+                <img
+                  src={item.src}
+                  alt={item.caption}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+                />
 
-            {/* Caption stays out of the way until you ask for it */}
-            <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <span className="absolute inset-x-0 bottom-0 translate-y-1 p-2.5 text-left opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:p-3">
-              <span className="font-mono text-[9px] leading-snug text-white/95 sm:text-[10px]">
-                {item.caption}
-              </span>
-            </span>
-          </button>
+                {/* Caption stays out of the way until you ask for it */}
+                <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="absolute inset-x-0 bottom-0 translate-y-1 p-2.5 text-left opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:p-3">
+                  <span className="font-mono text-[9px] leading-snug text-white/95 sm:text-[10px]">
+                    {item.caption}
+                  </span>
+                </span>
+              </motion.button>
+            ))}
+          </div>
         ))}
       </div>
 
