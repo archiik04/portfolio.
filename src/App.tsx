@@ -10,10 +10,10 @@ import { Gallery } from './components/site/Gallery';
 import { OpenSource } from './components/site/OpenSource';
 import { Stack } from './components/site/Stack';
 import { Education } from './components/site/Education';
-import { Proof } from './components/site/Proof';
 import { SiteFooter } from './components/site/SiteFooter';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { ResumeViewer } from './pages/ResumeViewer';
+import { OpenSourceAll } from './pages/OpenSourceAll';
 
 function Home() {
   return (
@@ -27,7 +27,6 @@ function Home() {
         <OpenSource />
         <Stack />
         <Education />
-        <Proof />
         <Gallery />
         <SiteFooter />
       </main>
@@ -65,6 +64,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/project/:projectId" element={<ProjectDetail />} />
         <Route path="/resume" element={<ResumeViewer />} />
+        <Route path="/open-source" element={<OpenSourceAll />} />
       </Routes>
     </div>
   );

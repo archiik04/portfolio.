@@ -12,6 +12,7 @@
   --color-faint: #9A9A9E;   /* captions, dates, meta */
   --color-line: rgba(15, 15, 15, 0.12);
   --color-raise: #FAFAFA;   /* the one lifted surface */
+  --color-raise-hi: #F1F1F2; /* same surface, hovered */
   --color-accent: #1F7A4D;  /* hover only, never a fill */
 }
 
@@ -22,6 +23,7 @@
   --color-faint: #6B6B72;
   --color-line: rgba(255, 255, 255, 0.14);
   --color-raise: #141414;
+  --color-raise-hi: #1E1E20;
   --color-accent: #45B07C;
 }
 
@@ -32,6 +34,7 @@
   --color-faint: var(--color-faint);
   --color-line: var(--color-line);
   --color-raise: var(--color-raise);
+  --color-raise-hi: var(--color-raise-hi);
   --color-accent: var(--color-accent);
 
   --font-sans: "Inter Tight", Inter, system-ui, -apple-system, sans-serif;
@@ -39,6 +42,13 @@
 
   /* The whole site is one narrow column */
   --spacing-column: 720px;
+
+  --animate-marquee: marquee 48s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 }
 
 html {

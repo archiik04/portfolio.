@@ -67,19 +67,30 @@ export const Intro: React.FC = () => (
         <span className="font-mono text-[11px] text-faint">bbsr/ind</span>
       </div>
 
-      <p className="mt-8 text-justify text-[13.5px] leading-[1.8] text-muted sm:text-[14.5px]">
-        hey! i&rsquo;m archi, a computer science undergrad at kiit who likes building, breaking and
-        shipping things. right now i&rsquo;m a product engineer intern at{' '}
-        <span className="text-ink">learning pathways</span>, building features end to end with react
-        on the front and fastapi behind it. before that i shipped a production rag platform at{' '}
-        <span className="text-ink">aashdit technologies</span>, doing semantic search across pdfs,
-        docx and scanned documents at 10k+ concurrent documents and sub-200ms. alongside all of it
-        i&rsquo;ve spent two years as a global youth advisor for google through{' '}
-        <span className="text-ink">canvas8</span>, testing gemini in beta and speaking at leadership
-        events on where young people and ai actually meet. i build in xr too: unity, vr, and an
-        inclusion scholarship from xr bootcamp. and when i&rsquo;m not building? probably writing
-        study notes that somehow earned &#8377;20,000+ on knowt.
+      <p className="mt-8 text-[13.5px] leading-[1.7] text-muted sm:text-[14.5px]">
+        computer science undergrad at kiit, currently interning as a product engineer.
       </p>
+
+      <ul className="mt-4 space-y-1.5 text-[13.5px] leading-[1.7] text-muted sm:text-[14.5px]">
+        <li className="flex gap-2.5">
+          <span className="text-faint">&middot;</span>
+          <span>rag systems, xr builds, and pull requests to repos i don&rsquo;t own.</span>
+        </li>
+        <li className="flex gap-2.5">
+          <span className="text-faint">&middot;</span>
+          <span>
+            spent two years telling <span className="text-ink">google</span> what people my age
+            want from ai.
+          </span>
+        </li>
+        <li className="flex gap-2.5">
+          <span className="text-faint">&middot;</span>
+          <span>
+            currently building <span className="text-ink">docsy</span> and{' '}
+            <span className="text-ink">emailbrain</span>, mostly at night.
+          </span>
+        </li>
+      </ul>
 
       <div className="mt-9 border-t border-line pt-6">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">

@@ -45,6 +45,7 @@ export const highlightsData: HighlightItem[] = [
     description: 'Awarded a competitive $7,800 scholarship for XR Bootcamp\'s Foundations & Prototyping Program.',
     link: 'https://www.linkedin.com/posts/archi-kanungo_xr-vr-mr-activity-7312029500236578817-X_FH',
     linkLabel: 'View Post',
+    thumbnail: '/proof/linkedin.jpg',
   },
   {
     id: 'mlsa-lead',
@@ -62,6 +63,7 @@ export const highlightsData: HighlightItem[] = [
     description: 'Created educational materials for the ed-tech startup Knowt. Content reached thousands of students, organically generating ₹20,000+, 3,174 note ratings (4.4 average), and 310 followers on the app.',
     link: 'https://knowt.com/u/archi.arsenic04',
     linkLabel: 'View Profile',
+    thumbnail: '/proof/knowt.jpg',
   },
   {
     id: 'global-innovation-trip',
