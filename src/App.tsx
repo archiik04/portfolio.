@@ -11,7 +11,6 @@ import { OpenSource } from './components/site/OpenSource';
 import { Stack } from './components/site/Stack';
 import { Education } from './components/site/Education';
 import { Proof } from './components/site/Proof';
-import { SayHi } from './components/site/SayHi';
 import { SiteFooter } from './components/site/SiteFooter';
 import { ProjectDetail } from './pages/ProjectDetail';
 import { ResumeViewer } from './pages/ResumeViewer';
@@ -30,7 +29,6 @@ function Home() {
         <Education />
         <Proof />
         <Gallery />
-        <SayHi />
         <SiteFooter />
       </main>
     </>

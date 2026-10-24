@@ -57,27 +57,5 @@ export const questsData: QuestItem[] = [
     category: 'XR / Unity',
     aspectRatio: 'aspect-square',
     date: 'Jun 2026'
-  },
-  {
-    id: 'artwork-sleepy-dog',
-    url: '/quests/sleepy-dog.jpg',
-    title: 'Sleepy Dog',
-    description: 'Pencil drawing capturing the soft form of a sleeping dog reading on a textbook.',
-    longWriting: '',
-    category: 'Artwork',
-    aspectRatio: 'aspect-[3/4]',
-    date: 'Jun 2026',
-    disablePopup: true
-  },
-  {
-    id: 'artwork-mindscape',
-    url: '/quests/mindscape.jpg',
-    title: 'Mindscape',
-    description: 'Scratchboard illustration exploring architectural thoughts, chains, and negative lines.',
-    longWriting: '',
-    category: 'Artwork',
-    aspectRatio: 'aspect-square',
-    date: 'Jun 2026',
-    disablePopup: true
   }
 ];

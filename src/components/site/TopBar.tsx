@@ -9,7 +9,7 @@ const NAV = [
   { label: 'side quests', href: '#side-quests' },
   { label: 'open source', href: '#oss' },
   { label: 'gallery', href: '#gallery' },
-  { label: 'say hi', href: '#say-hi' },
+  { label: 'contact', href: '#say-hi' },
 ];
 
 /** Lenis owns the scroll, so anchors are driven through it rather than natively. */

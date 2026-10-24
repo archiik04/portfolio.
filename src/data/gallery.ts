@@ -1,67 +1,23 @@
 export interface GalleryItem {
   src: string;
-  /** Tailwind grid spans, matching a 4-column grid */
-  span: string;
   caption: string;
 }
 
 /**
- * Photos cropped out of the scrapbook collage. Captions describe what is in
- * frame; rewrite them in your own voice whenever you like.
+ * Laid out as masonry, so these keep their own aspect ratio and nothing gets
+ * cropped. Order is roughly how they flow down the columns.
  */
 export const galleryItems: GalleryItem[] = [
-  {
-    src: '/gallery/google-office.jpg',
-    span: 'col-span-2 row-span-2',
-    caption: 'the google office, finally on the inside.',
-  },
-  { src: '/gallery/duck.jpg', span: 'col-span-1 row-span-1', caption: 'this duck had places to be.' },
-  { src: '/gallery/headset.jpg', span: 'col-span-1 row-span-1', caption: 'headset, charged and waiting.' },
-  {
-    src: '/gallery/ctf.jpg',
-    span: 'col-span-2 row-span-1',
-    caption: 'defcon 3301, capture the flag, whole team in.',
-  },
-  {
-    src: '/gallery/mlsa-badge.jpg',
-    span: 'col-span-1 row-span-2',
-    caption: 'technical executive, mlsa.',
-  },
-  {
-    src: '/gallery/mun-denmark.jpg',
-    span: 'col-span-1 row-span-2',
-    caption: 'denmark, kiit model united nations.',
-  },
-  {
-    src: '/gallery/beach-cleanup.jpg',
-    span: 'col-span-2 row-span-1',
-    caption: 'lake cleanup, gloves on, bags full.',
-  },
-  { src: '/gallery/window.jpg', span: 'col-span-1 row-span-1', caption: 'found a window worth sitting in.' },
-  { src: '/gallery/sparkler.jpg', span: 'col-span-1 row-span-1', caption: 'long exposure, short attention span.' },
-  {
-    src: '/gallery/sleepy-dog.jpg',
-    span: 'col-span-1 row-span-2',
-    caption: 'sleepy dog, pencil.',
-  },
-  {
-    src: '/gallery/mindscape.jpg',
-    span: 'col-span-1 row-span-2',
-    caption: 'mindscape, scratchboard.',
-  },
-  {
-    src: '/gallery/mlsa-crew.jpg',
-    span: 'col-span-2 row-span-1',
-    caption: 'everyone who showed up, one frame.',
-  },
-  {
-    src: '/gallery/talk-wide.jpg',
-    span: 'col-span-2 row-span-1',
-    caption: 'presenting web ar to a full room.',
-  },
-  {
-    src: '/gallery/books.jpg',
-    span: 'col-span-4 row-span-1',
-    caption: 'the stack that did not fit in the bag.',
-  },
+  { src: '/gallery/google-office.jpg', caption: 'the google office, finally on the inside.' },
+  { src: '/gallery/ctf.jpg', caption: 'defcon 3301, capture the flag, whole team in.' },
+  { src: '/gallery/mlsa-badge.jpg', caption: 'technical executive, mlsa.' },
+  { src: '/gallery/beach-cleanup.jpg', caption: 'lake cleanup, gloves on, bags full.' },
+  { src: '/gallery/talk-wide.jpg', caption: 'presenting web ar to a full room.' },
+  { src: '/gallery/window.jpg', caption: 'found a window worth sitting in.' },
+  { src: '/gallery/mun-denmark.jpg', caption: 'denmark, kiit model united nations.' },
+  { src: '/gallery/mlsa-crew.jpg', caption: 'everyone who showed up, one frame.' },
+  { src: '/gallery/sleepy-dog.jpg', caption: 'sleepy dog, pencil.' },
+  { src: '/gallery/sparkler.jpg', caption: 'long exposure, short attention span.' },
+  { src: '/gallery/mindscape.jpg', caption: 'mindscape, scratchboard.' },
+  { src: '/gallery/headset.jpg', caption: 'headset, charged and waiting.' },
 ];

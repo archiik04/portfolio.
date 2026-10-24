@@ -41,19 +41,20 @@ export const Gallery: React.FC = () => {
 
   return (
     <Section id="gallery" label="gallery" caption="pics, mostly unplanned.">
-      <div className="grid auto-rows-[96px] grid-cols-4 gap-1.5 sm:auto-rows-[136px] sm:gap-2">
+      {/* Masonry: every photo keeps its own shape, nothing is cropped */}
+      <div className="columns-2 gap-2 sm:columns-3">
         {galleryItems.map((item, i) => (
           <button
             key={item.src}
             onClick={() => setOpen(i)}
             aria-label={item.caption}
-            className={`${item.span} group relative cursor-zoom-in overflow-hidden rounded-[6px] bg-raise`}
+            className="group relative mb-2 block w-full cursor-zoom-in overflow-hidden rounded-[6px] bg-raise break-inside-avoid"
           >
             <img
               src={item.src}
               alt={item.caption}
               loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+              className="block h-auto w-full transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
             />
 
             {/* Caption stays out of the way until you ask for it */}

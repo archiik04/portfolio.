@@ -1,5 +1,6 @@
 import React from 'react';
-import { Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Mail, Calendar, FileText } from 'lucide-react';
 import { Github, Linkedin } from '../Icons';
 
 const SOCIALS = [
@@ -15,10 +16,17 @@ const SOCIALS = [
     ),
   },
   { label: 'Email', href: 'mailto:archikanungo2004@gmail.com', icon: <Mail className="h-[15px] w-[15px]" /> },
+  {
+    label: 'Book a call',
+    href: 'https://calendly.com/archi_k/youth-mentorship',
+    icon: <Calendar className="h-[15px] w-[15px]" />,
+  },
 ];
 
+const ICON = 'text-faint transition-colors duration-300 hover:text-ink';
+
 export const SiteFooter: React.FC = () => (
-  <footer className="pb-8 pt-6 no-print">
+  <footer id="say-hi" className="scroll-mt-20 pb-8 pt-6 no-print">
     <div className="flex flex-col gap-5 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-4">
         {SOCIALS.map(s => (
@@ -28,11 +36,15 @@ export const SiteFooter: React.FC = () => (
             target={s.href.startsWith('mailto:') ? undefined : '_blank'}
             rel="noopener noreferrer"
             aria-label={s.label}
-            className="text-faint transition-colors duration-300 hover:text-ink"
+            title={s.label}
+            className={ICON}
           >
             {s.icon}
           </a>
         ))}
+        <Link to="/resume" aria-label="Resume" title="Resume" className={ICON}>
+          <FileText className="h-[15px] w-[15px]" />
+        </Link>
       </div>
 
       <p className="font-mono text-[10px] text-faint">
@@ -40,10 +52,21 @@ export const SiteFooter: React.FC = () => (
       </p>
     </div>
 
-    <p className="mt-10 text-[28px] font-medium leading-[1.1] tracking-[-0.03em] text-ink sm:text-[38px]">
-      building, breaking,
+    <a
+      href="mailto:archikanungo2004@gmail.com"
+      className="mt-7 inline-flex items-center gap-2 font-mono text-[11px] text-muted transition-colors duration-300 hover:text-ink"
+    >
+      <span className="relative flex h-2 w-2 shrink-0">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+      </span>
+      archikanungo2004@gmail.com
+    </a>
+
+    <p className="mt-6 text-[28px] font-medium leading-[1.1] tracking-[-0.03em] text-ink sm:text-[38px]">
+      ninety frames a second,
       <br />
-      shipping anyway.
+      or it doesn&rsquo;t ship.
     </p>
   </footer>
 );
