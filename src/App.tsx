@@ -35,11 +35,14 @@ function Home() {
   );
 }
 
-/** Pages lift in and sink out, with a sweep of the paper colour behind them. */
+/**
+ * Pages lift in and sink out. Opacity and transform only: animating a filter
+ * across a full page drops frames, and the blur was not worth the stutter.
+ */
 const PAGE = {
-  initial: { opacity: 0, y: 18, filter: 'blur(6px)' },
-  animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
-  exit: { opacity: 0, y: -12, filter: 'blur(6px)' },
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -10 },
 };
 
 function App() {
@@ -72,10 +75,11 @@ function App() {
         <motion.div
           key={location.pathname}
           variants={PAGE}
+          style={{ willChange: 'opacity, transform' }}
           initial="initial"
           animate="animate"
           exit="exit"
-          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
         >
           <Routes location={location}>
             <Route path="/" element={<Home />} />

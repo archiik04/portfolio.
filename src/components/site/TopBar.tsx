@@ -103,8 +103,8 @@ export const TopBar: React.FC = () => {
           clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
         },
         {
-          duration: 620,
-          easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+          duration: 760,
+          easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
           pseudoElement: '::view-transition-new(root)',
         }
       );
@@ -155,8 +155,8 @@ export const TopBar: React.FC = () => {
           {/* Pinned outside the scroller so it is always reachable */}
           <motion.button
             onClick={toggleTheme}
-            whileTap={{ scale: 0.86 }}
-            transition={{ type: 'spring', stiffness: 500, damping: 18 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 24 }}
             aria-label={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             title={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             className="relative flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted transition-colors duration-300 hover:text-ink"
@@ -173,10 +173,10 @@ export const TopBar: React.FC = () => {
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={theme}
-                initial={{ rotate: -120, opacity: 0, scale: 0.4 }}
+                initial={{ rotate: -90, opacity: 0, scale: 0.55 }}
                 animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                exit={{ rotate: 120, opacity: 0, scale: 0.4 }}
-                transition={{ type: 'spring', stiffness: 320, damping: 20 }}
+                exit={{ rotate: 90, opacity: 0, scale: 0.55 }}
+                transition={{ type: 'spring', stiffness: 240, damping: 26, mass: 0.8 }}
                 className="absolute flex items-center justify-center"
               >
                 {theme === 'light' ? (

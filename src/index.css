@@ -118,12 +118,13 @@ body {
 
 /* The ring that pulses out of the theme button on press */
 @keyframes switch-ring {
-  from { opacity: 0.5; transform: scale(0.6); }
-  to { opacity: 0; transform: scale(2.4); }
+  from { opacity: 0.45; transform: scale(0.75); }
+  to { opacity: 0; transform: scale(2.1); }
 }
 
 .switch-ring {
-  animation: switch-ring 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: switch-ring 760ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  will-change: opacity, transform;
 }
 
 /* Lenis smooth scrolling */
