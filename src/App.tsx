@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useLenis } from './hooks/useLenis';
 import { TopBar } from './components/site/TopBar';
 import { Intro } from './components/site/Intro';
@@ -34,6 +35,13 @@ function Home() {
   );
 }
 
+/** Pages lift in and sink out, with a sweep of the paper colour behind them. */
+const PAGE = {
+  initial: { opacity: 0, y: 18, filter: 'blur(6px)' },
+  animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
+  exit: { opacity: 0, y: -12, filter: 'blur(6px)' },
+};
+
 function App() {
   useLenis();
   const location = useLocation();
@@ -60,12 +68,23 @@ function App() {
 
   return (
     <div className="min-h-screen bg-paper text-ink antialiased">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/project/:projectId" element={<ProjectDetail />} />
-        <Route path="/resume" element={<ResumeViewer />} />
-        <Route path="/open-source" element={<OpenSourceAll />} />
-      </Routes>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={location.pathname}
+          variants={PAGE}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Routes location={location}>
+            <Route path="/" element={<Home />} />
+            <Route path="/project/:projectId" element={<ProjectDetail />} />
+            <Route path="/resume" element={<ResumeViewer />} />
+            <Route path="/open-source" element={<OpenSourceAll />} />
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

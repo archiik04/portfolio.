@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { Logo } from './Logo';
+import { playSwitch } from '../../lib/sound';
 
 const NAV = [
   { label: 'work', href: '#work' },
@@ -23,8 +25,15 @@ const jumpTo = (hash: string) => (e: React.MouseEvent) => {
   history.replaceState(null, '', hash);
 };
 
+type Theme = 'light' | 'dark';
+
+const apply = (next: Theme) => {
+  document.documentElement.classList.toggle('dark', next === 'dark');
+  localStorage.setItem('theme', next);
+};
+
 export const TopBar: React.FC = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+  const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'light';
     const saved = localStorage.getItem('theme');
     if (saved === 'dark' || saved === 'light') return saved;
@@ -34,12 +43,13 @@ export const TopBar: React.FC = () => {
   // Bar retreats as you scroll down and returns the moment you scroll back up
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
+  const [ring, setRing] = useState(0);
   const lastY = useRef(0);
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    apply(theme);
+    // only syncs what the initial state resolved to; later changes go through toggle
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const onScroll = () => {
@@ -52,6 +62,54 @@ export const TopBar: React.FC = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const next: Theme = theme === 'light' ? 'dark' : 'light';
+
+    playSwitch(next === 'dark');
+    setRing(r => r + 1);
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const start = (document as Document & {
+      startViewTransition?: (cb: () => void) => { ready: Promise<void> };
+    }).startViewTransition;
+
+    // No view transitions, or motion is turned down: just switch
+    if (!start || reduced) {
+      apply(next);
+      setTheme(next);
+      return;
+    }
+
+    // The new theme is revealed by a circle growing out of the button
+    const box = e.currentTarget.getBoundingClientRect();
+    const x = box.left + box.width / 2;
+    const y = box.top + box.height / 2;
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = start.call(document, () => {
+      flushSync(() => {
+        apply(next);
+        setTheme(next);
+      });
+    });
+
+    void transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
+        },
+        {
+          duration: 620,
+          easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+          pseudoElement: '::view-transition-new(root)',
+        }
+      );
+    });
+  };
 
   return (
     <header
@@ -95,19 +153,30 @@ export const TopBar: React.FC = () => {
           </nav>
 
           {/* Pinned outside the scroller so it is always reachable */}
-          <button
-            onClick={() => setTheme(t => (t === 'light' ? 'dark' : 'light'))}
+          <motion.button
+            onClick={toggleTheme}
+            whileTap={{ scale: 0.86 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 18 }}
             aria-label={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             title={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             className="relative flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted transition-colors duration-300 hover:text-ink"
           >
+            {/* A ring leaves the button each time it is pressed */}
+            {ring > 0 && (
+              <span
+                key={ring}
+                aria-hidden="true"
+                className="switch-ring pointer-events-none absolute inset-0 rounded-full border border-current"
+              />
+            )}
+
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={theme}
-                initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
+                initial={{ rotate: -120, opacity: 0, scale: 0.4 }}
                 animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                exit={{ rotate: 90, opacity: 0, scale: 0.6 }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
+                exit={{ rotate: 120, opacity: 0, scale: 0.4 }}
+                transition={{ type: 'spring', stiffness: 320, damping: 20 }}
                 className="absolute flex items-center justify-center"
               >
                 {theme === 'light' ? (
@@ -117,7 +186,7 @@ export const TopBar: React.FC = () => {
                 )}
               </motion.span>
             </AnimatePresence>
-          </button>
+          </motion.button>
         </div>
       </div>
     </header>
