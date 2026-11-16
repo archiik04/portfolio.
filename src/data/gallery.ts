@@ -11,7 +11,7 @@ export const galleryItems: GalleryItem[] = [
   { src: '/gallery/mlsa-badge.jpg', ratio: 0.75, caption: 'technical executive, mlsa.' },
   { src: '/gallery/beach-cleanup.jpg', ratio: 1.1444, caption: "nss plogging drive '25" },
   { src: '/gallery/talk-wide.jpg', ratio: 1.5035, caption: "project wing '26" },
-  { src: '/gallery/window.jpg', ratio: 0.7273, caption: 'found a window worth sitting in.' },
+  { src: '/gallery/window.jpg', ratio: 0.7273, caption: 'imam bada, lucknow' },
   { src: '/gallery/mlsa-crew.jpg', ratio: 1.5006, caption: 'everyone who showed up, one frame.' },
   { src: '/gallery/sleepy-dog.jpg', ratio: 0.7024, caption: 'sleepy dog, pencil.' },
   { src: '/gallery/sparkler.jpg', ratio: 0.7255, caption: 'long exposure, short attention span.' },
