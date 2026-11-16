@@ -1,99 +1,17 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Section } from './Section';
-import { galleryItems, type GalleryItem } from '../../data/gallery';
-
-type Placed = GalleryItem & { index: number };
+import { galleryItems } from '../../data/gallery';
 
 /**
- * Column packing from the known aspect ratios. CSS columns strand the last
- * column well short of the others, and plain greedy placement is order
- * dependent, so this does longest-first placement and then a short local
- * search that moves or swaps tiles while it keeps reducing the height spread.
- * Height is measured in units of column width (1 / ratio).
+ * Printed photos rather than a grid: each one sits on a white card with the
+ * caption on the lower margin, and the row scrolls sideways off both edges.
+ * The card stays white in either theme, which is the point of a polaroid.
  */
-const packColumns = (items: GalleryItem[], count: number): Placed[][] => {
-  const placed: Placed[] = items.map((item, index) => ({ ...item, index }));
-  const height = (item: Placed) => 1 / item.ratio;
-  const total = (column: Placed[]) => column.reduce((sum, i) => sum + height(i), 0);
-  const spread = (cols: Placed[][]) => {
-    const totals = cols.map(total);
-    return Math.max(...totals) - Math.min(...totals);
-  };
-
-  // Longest first into whichever column is currently shortest
-  const columns: Placed[][] = Array.from({ length: count }, () => []);
-  [...placed]
-    .sort((a, b) => height(b) - height(a))
-    .forEach(item => {
-      const totals = columns.map(total);
-      columns[totals.indexOf(Math.min(...totals))].push(item);
-    });
-
-  // Then nudge: move or swap across columns while the spread keeps shrinking
-  for (let pass = 0; pass < 60; pass += 1) {
-    const totals = columns.map(total);
-    const tall = totals.indexOf(Math.max(...totals));
-    const short = totals.indexOf(Math.min(...totals));
-    if (tall === short) break;
-
-    let improved = false;
-    const best = spread(columns);
-
-    for (let i = 0; i < columns[tall].length && !improved; i += 1) {
-      // try moving one tile down to the shortest column
-      const moved = columns[tall].splice(i, 1)[0];
-      columns[short].push(moved);
-      if (spread(columns) < best) {
-        improved = true;
-      } else {
-        columns[short].pop();
-        columns[tall].splice(i, 0, moved);
-      }
-
-      // otherwise try trading it for one of the shortest column's tiles
-      for (let j = 0; j < columns[short].length && !improved; j += 1) {
-        const a = columns[tall][i];
-        const b = columns[short][j];
-        columns[tall][i] = b;
-        columns[short][j] = a;
-        if (spread(columns) < best) {
-          improved = true;
-        } else {
-          columns[tall][i] = a;
-          columns[short][j] = b;
-        }
-      }
-    }
-
-    if (!improved) break;
-  }
-
-  // Read top to bottom in the order the data declares
-  return columns.map(column => [...column].sort((a, b) => a.index - b.index));
-};
-
-/** 2 columns on a phone, 3 from the sm breakpoint up */
-const useColumnCount = () => {
-  const [count, setCount] = useState(3);
-
-  useEffect(() => {
-    const query = window.matchMedia('(min-width: 640px)');
-    const sync = () => setCount(query.matches ? 3 : 2);
-    sync();
-    query.addEventListener('change', sync);
-    return () => query.removeEventListener('change', sync);
-  }, []);
-
-  return count;
-};
-
 export const Gallery: React.FC = () => {
   const [open, setOpen] = useState<number | null>(null);
-  const columnCount = useColumnCount();
-  const columns = useMemo(() => packColumns(galleryItems, columnCount), [columnCount]);
 
   const close = useCallback(() => setOpen(null), []);
   const step = useCallback(
@@ -126,40 +44,45 @@ export const Gallery: React.FC = () => {
   const active = open === null ? null : galleryItems[open];
 
   return (
-    <Section id="gallery" label="gallery" caption="pics, mostly unplanned.">
-      <div className="flex items-start gap-2">
-        {columns.map((column, ci) => (
-          <div key={ci} className="flex flex-1 flex-col gap-2">
-            {column.map(item => (
-              <motion.button
-                key={item.src}
-                onClick={() => setOpen(item.index)}
-                aria-label={item.caption}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.45, ease: [0.215, 0.61, 0.355, 1] }}
-                style={{ aspectRatio: item.ratio }}
-                className="group relative w-full cursor-zoom-in overflow-hidden rounded-[6px] bg-raise"
-              >
+    <Section id="moments" label="moments" caption="a glimpse, mostly unplanned.">
+      <p className="mb-8 max-w-[52ch] text-[13.5px] leading-[1.7] text-muted sm:text-[14.5px]">
+        still figuring it out. here is a bit of the way there so far.
+      </p>
+
+      {/* Cards run off both edges and fade rather than being cut */}
+      <div
+        className="-mx-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+          [mask-image:linear-gradient(to_right,transparent_0,#000_4%,#000_96%,transparent_100%)]
+          [-webkit-mask-image:linear-gradient(to_right,transparent_0,#000_4%,#000_96%,transparent_100%)]"
+      >
+        <div className="flex w-max gap-4 px-6">
+          {galleryItems.map((item, i) => (
+            <motion.button
+              key={item.src}
+              onClick={() => setOpen(i)}
+              aria-label={item.caption}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.45, ease: [0.33, 1, 0.68, 1], delay: (i % 4) * 0.05 }}
+              whileHover={{ y: -6 }}
+              className="group w-[196px] shrink-0 cursor-zoom-in rounded-[3px] bg-white p-2.5 pb-3 shadow-[0_2px_10px_rgba(0,0,0,0.10)] ring-1 ring-black/[0.06] transition-shadow duration-300 hover:shadow-[0_14px_34px_rgba(0,0,0,0.22)] sm:w-[224px]"
+            >
+              <span className="block aspect-[4/5] w-full overflow-hidden bg-neutral-100">
                 <img
                   src={item.src}
                   alt={item.caption}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+                  className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
                 />
+              </span>
 
-                {/* Caption stays out of the way until you ask for it */}
-                <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <span className="absolute inset-x-0 bottom-0 translate-y-1 p-2.5 text-left opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:p-3">
-                  <span className="font-mono text-[9px] leading-snug text-white/95 sm:text-[10px]">
-                    {item.caption}
-                  </span>
-                </span>
-              </motion.button>
-            ))}
-          </div>
-        ))}
+              <span className="mt-3 block px-1 pb-1 text-center font-sans text-[12px] leading-snug text-neutral-800">
+                {item.caption}
+              </span>
+            </motion.button>
+          ))}
+        </div>
       </div>
 
       {createPortal(

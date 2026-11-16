@@ -10,7 +10,7 @@ const NAV = [
   { label: 'built', href: '#built' },
   { label: 'side quests', href: '#side-quests' },
   { label: 'open source', href: '#oss' },
-  { label: 'gallery', href: '#gallery' },
+  { label: 'moments', href: '#moments' },
   { label: 'contact', href: '#say-hi' },
 ];
 
