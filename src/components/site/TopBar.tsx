@@ -3,26 +3,29 @@ import { flushSync } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { Logo } from './Logo';
+import { useActiveSection } from '../../hooks/useActiveSection';
 import { playSwitch } from '../../lib/sound';
 
 const NAV = [
-  { label: 'work', href: '#work' },
-  { label: 'built', href: '#built' },
-  { label: 'side quests', href: '#side-quests' },
-  { label: 'open source', href: '#oss' },
-  { label: 'moments', href: '#moments' },
-  { label: 'contact', href: '#say-hi' },
+  { label: 'work', id: 'work' },
+  { label: 'built', id: 'built' },
+  { label: 'side quests', id: 'side-quests' },
+  { label: 'open source', id: 'oss' },
+  { label: 'moments', id: 'moments' },
+  { label: 'contact', id: 'say-hi' },
 ];
 
+const SECTION_IDS = NAV.map(item => item.id);
+
 /** Lenis owns the scroll, so anchors are driven through it rather than natively. */
-const jumpTo = (hash: string) => (e: React.MouseEvent) => {
-  const el = document.getElementById(hash.slice(1));
+const jumpTo = (id: string) => (e: React.MouseEvent) => {
+  const el = document.getElementById(id);
   if (!el) return;
   e.preventDefault();
   const lenis = (window as unknown as { lenis?: { scrollTo: (t: Element, o?: object) => void } }).lenis;
-  if (lenis) lenis.scrollTo(el, { offset: -56 });
+  if (lenis) lenis.scrollTo(el, { offset: -76 });
   else el.scrollIntoView({ behavior: 'smooth' });
-  history.replaceState(null, '', hash);
+  history.replaceState(null, '', `#${id}`);
 };
 
 type Theme = 'light' | 'dark';
@@ -42,9 +45,11 @@ export const TopBar: React.FC = () => {
 
   // Bar retreats as you scroll down and returns the moment you scroll back up
   const [hidden, setHidden] = useState(false);
-  const [solid, setSolid] = useState(false);
   const [ring, setRing] = useState(0);
   const lastY = useRef(0);
+
+  // Which section the reader is actually in, so the marker can follow them
+  const active = useActiveSection(SECTION_IDS);
 
   useEffect(() => {
     apply(theme);
@@ -54,8 +59,7 @@ export const TopBar: React.FC = () => {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      setSolid(y > 24);
-      setHidden(y > 160 && y > lastY.current);
+      setHidden(y > 260 && y > lastY.current);
       lastY.current = y;
     };
     onScroll();
@@ -113,82 +117,90 @@ export const TopBar: React.FC = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 no-print transition-transform duration-500 ease-out ${
-        hidden ? '-translate-y-full' : 'translate-y-0'
+      className={`fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-3 no-print transition-transform duration-500 ease-out sm:pt-4 ${
+        hidden ? '-translate-y-[160%]' : 'translate-y-0'
       }`}
     >
-      <div
-        className={`border-b transition-colors duration-300 ${
-          solid ? 'border-line bg-paper/85 backdrop-blur-md' : 'border-transparent bg-transparent'
-        }`}
+      {/* A floating island rather than a full-width bar, so the page still
+          reads as one centred column with nothing spanning behind it. */}
+      <nav
+        aria-label="Sections"
+        className="flex max-w-full items-center gap-1 rounded-full border border-line bg-paper/70 p-1 pl-3 shadow-[0_4px_24px_rgba(0,0,0,0.07)] backdrop-blur-xl sm:gap-1.5 sm:pl-4 dark:shadow-[0_4px_24px_rgba(0,0,0,0.55)]"
       >
-        <div className="mx-auto flex h-14 max-w-column items-center gap-3 px-5 sm:gap-4 sm:px-6">
-          <a
-            href="#top"
-            onClick={jumpTo('#top')}
-            aria-label="back to top"
-            className="shrink-0 text-ink transition-opacity duration-300 hover:opacity-60"
-          >
-            <Logo className="h-[9px] w-auto sm:h-[10px]" />
-          </a>
+        <a
+          href="#top"
+          onClick={jumpTo('top')}
+          aria-label="back to top"
+          className="shrink-0 text-ink transition-opacity duration-300 hover:opacity-60"
+        >
+          <Logo className="h-[9px] w-auto sm:h-[10px]" />
+        </a>
 
-          {/* Scrolls sideways when the links outrun the screen, and fades at the
-              right edge so it is obvious there is more than fits. */}
-          <nav
-            className="flex min-w-0 flex-1 items-center justify-start gap-4 overflow-x-auto [scrollbar-width:none] sm:justify-end sm:gap-5 [&::-webkit-scrollbar]:hidden
-              [mask-image:linear-gradient(to_right,#000_calc(100%-20px),transparent_100%)] sm:[mask-image:none]
-              [-webkit-mask-image:linear-gradient(to_right,#000_calc(100%-20px),transparent_100%)] sm:[-webkit-mask-image:none]"
-          >
-            {NAV.map(item => (
+        <span className="mx-1 hidden h-4 w-px bg-line sm:block" aria-hidden="true" />
+
+        <div className="flex min-w-0 items-center gap-0.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {NAV.map(item => {
+            const isActive = active === item.id;
+            return (
               <a
-                key={item.href}
-                href={item.href}
-                onClick={jumpTo(item.href)}
-                className="group relative shrink-0 whitespace-nowrap font-mono text-[11px] text-muted transition-colors duration-300 hover:text-ink"
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={jumpTo(item.id)}
+                aria-current={isActive ? 'true' : undefined}
+                className={`relative shrink-0 whitespace-nowrap rounded-full px-2.5 py-1.5 font-mono text-[11px] transition-colors duration-300 sm:px-3 ${
+                  isActive ? 'text-ink' : 'text-faint hover:text-muted'
+                }`}
               >
-                {item.label}
-                <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-accent transition-all duration-300 ease-out group-hover:w-full" />
-              </a>
-            ))}
-          </nav>
-
-          {/* Pinned outside the scroller so it is always reachable */}
-          <motion.button
-            onClick={toggleTheme}
-            whileTap={{ scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 24 }}
-            aria-label={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            title={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            className="relative flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-muted transition-colors duration-300 hover:text-ink"
-          >
-            {/* A ring leaves the button each time it is pressed */}
-            {ring > 0 && (
-              <span
-                key={ring}
-                aria-hidden="true"
-                className="switch-ring pointer-events-none absolute inset-0 rounded-full border border-current"
-              />
-            )}
-
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.span
-                key={theme}
-                initial={{ rotate: -90, opacity: 0, scale: 0.55 }}
-                animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                exit={{ rotate: 90, opacity: 0, scale: 0.55 }}
-                transition={{ type: 'spring', stiffness: 240, damping: 26, mass: 0.8 }}
-                className="absolute flex items-center justify-center"
-              >
-                {theme === 'light' ? (
-                  <Moon className="h-[14px] w-[14px]" />
-                ) : (
-                  <Sun className="h-[14px] w-[14px]" />
+                {/* One marker that slides from the old section to the new one */}
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-marker"
+                    className="absolute inset-0 rounded-full bg-line/[0.55]"
+                    transition={{ type: 'spring', stiffness: 340, damping: 32 }}
+                  />
                 )}
-              </motion.span>
-            </AnimatePresence>
-          </motion.button>
+                <span className="relative z-10">{item.label}</span>
+              </a>
+            );
+          })}
         </div>
-      </div>
+
+        <span className="mx-1 hidden h-4 w-px bg-line sm:block" aria-hidden="true" />
+
+        <motion.button
+          onClick={toggleTheme}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 24 }}
+          aria-label={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          title={`switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          className="relative flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full text-faint transition-colors duration-300 hover:bg-line/[0.45] hover:text-ink"
+        >
+          {ring > 0 && (
+            <span
+              key={ring}
+              aria-hidden="true"
+              className="switch-ring pointer-events-none absolute inset-0 rounded-full border border-current"
+            />
+          )}
+
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={theme}
+              initial={{ rotate: -90, opacity: 0, scale: 0.55 }}
+              animate={{ rotate: 0, opacity: 1, scale: 1 }}
+              exit={{ rotate: 90, opacity: 0, scale: 0.55 }}
+              transition={{ type: 'spring', stiffness: 240, damping: 26, mass: 0.8 }}
+              className="absolute flex items-center justify-center"
+            >
+              {theme === 'light' ? (
+                <Moon className="h-[14px] w-[14px]" />
+              ) : (
+                <Sun className="h-[14px] w-[14px]" />
+              )}
+            </motion.span>
+          </AnimatePresence>
+        </motion.button>
+      </nav>
     </header>
   );
 };

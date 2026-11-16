@@ -19,7 +19,6 @@ import { OpenSourceAll } from './pages/OpenSourceAll';
 function Home() {
   return (
     <>
-      <TopBar />
       <main className="mx-auto w-full max-w-column px-6">
         <Intro />
         <Work />
@@ -71,6 +70,10 @@ function App() {
 
   return (
     <div className="min-h-screen bg-paper text-ink antialiased">
+      {/* Outside the transition wrapper, or its transform would capture the
+          fixed positioning and the bar would scroll away with the page. */}
+      {location.pathname === '/' && <TopBar />}
+
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={location.pathname}

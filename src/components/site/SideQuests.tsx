@@ -85,7 +85,7 @@ export const SideQuests: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <Section id="side-quests" label="side quests" caption="builds, wins and detours.">
+    <Section id="side-quests" label="side quests">
       {expanded ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {cards.map(item => (

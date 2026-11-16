@@ -5,7 +5,7 @@ import { skillCategories } from '../../data/skills';
 const lower = (s: string) => s.toLowerCase();
 
 export const Stack: React.FC = () => (
-  <Section id="stack" label="stack" caption="what i reach for.">
+  <Section id="stack" label="stack">
     <div className="space-y-6">
       {skillCategories.map(group => (
         <div

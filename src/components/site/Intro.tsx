@@ -126,10 +126,6 @@ export const Intro: React.FC = () => (
               <span>22</span>
               <span className="text-faint">&middot;</span>
               <span>engineer</span>
-              <span className="text-faint">&middot;</span>
-              <span>developer</span>
-              <span className="text-faint">&middot;</span>
-              <span>builder</span>
             </p>
             <span className="font-mono text-[11px] text-faint">bbsr/ind</span>
           </div>

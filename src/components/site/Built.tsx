@@ -28,7 +28,7 @@ const techLabel = (tech: string) =>
   TECH_LABELS[tech.toLowerCase()] ?? tech.charAt(0).toUpperCase() + tech.slice(1);
 
 export const Built: React.FC = () => (
-  <Section id="built" label="built" caption="shipped, running, real.">
+  <Section id="built" label="built">
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
       {projects.map((project, i) => (
         <motion.article

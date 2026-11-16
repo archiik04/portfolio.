@@ -44,7 +44,7 @@ export const Gallery: React.FC = () => {
   const active = open === null ? null : galleryItems[open];
 
   return (
-    <Section id="moments" label="moments" caption="a glimpse, mostly unplanned.">
+    <Section id="moments" label="moments">
       <p className="mb-8 max-w-[52ch] text-[13.5px] leading-[1.7] text-muted sm:text-[14.5px]">
         still figuring it out. here is a bit of the way there so far.
       </p>

@@ -16,7 +16,7 @@ export const Work: React.FC = () => {
   const toggle = (id: string) => setOpen(prev => ({ ...prev, [id]: !prev[id] }));
 
   return (
-    <Section id="work" label="work" caption="places i've built things.">
+    <Section id="work" label="work">
       <ol>
         {experiences.map(item => {
           const isOpen = !!open[item.id];
