@@ -12,6 +12,15 @@ export interface HighlightItem {
 
 export const highlightsData: HighlightItem[] = [
   {
+    id: 'hackerrank-orchestrate',
+    tag: 'Contest',
+    title: 'HackerRank Orchestrate 2026',
+    description: 'Finished #179 with 73.4/100 on Ghost Data Still Exists, including 28.2/30 on the data output.',
+    link: 'https://www.hackerrank.com/contests/hackerrank-orchestrate-october26/challenges/ghost-data-still-exists/leaderboard?username=archikanungo2004',
+    linkLabel: 'View Leaderboard',
+    thumbnail: '/proof/hackerrank.jpg',
+  },
+  {
     id: 'openai-buildathon',
     tag: 'Hackathon',
     title: 'OpenAI Academy × NxtWave × IndiaAI Buildathon 2025',
